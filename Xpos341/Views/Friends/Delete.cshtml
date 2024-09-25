@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Friend
+@{
+    ViewData["Title"] = "Delete Friend";
+    }
+<div>Are you sure delete this data @Model.Name</div>
+<form action="Delete" method="post">
+    <input type="hidden"  id="Id" name="Id" value="@Model.Id"/>
+    <div>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <a class="btn btn-secondary" asp-asp-controller="Friend" asp-action="Index">Back To List</a>
+    </div>
+
+</form>
