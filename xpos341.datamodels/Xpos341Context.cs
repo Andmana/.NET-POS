@@ -25,11 +25,10 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07F4A91135");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC079B8E5BC3");
 
             entity.ToTable("TblCategory");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.CreateDate).HasColumnType("datetime");
             entity.Property(e => e.Description).IsUnicode(false);
             entity.Property(e => e.NameCategory)
