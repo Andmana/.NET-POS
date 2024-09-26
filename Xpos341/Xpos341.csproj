@@ -20,4 +20,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\xpos341.datamodels\xpos341.datamodels.csproj" />
+    <ProjectReference Include="..\xpos341.viewmodels\xpos341.viewmodels.csproj" />
+  </ItemGroup>
+
 </Project>
