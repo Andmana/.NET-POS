@@ -15,11 +15,36 @@ namespace Xpos341.Controllers
             db = _db;
             this.categoryTryService = new CategoryTryService(db);
         }
-
+        // GET: CategoryTry
         public IActionResult Index()
         {
             List<VMTblCategory> dataView = categoryTryService.GetAllData();
             return View(dataView);
+        }
+
+        public IActionResult Create()
+        {
+            VMTblCategory dataView = new VMTblCategory();
+            return PartialView(dataView);
+        }
+
+        [HttpPost]
+        public IActionResult Create(VMTblCategory dataView)
+        {
+            VMResponse response = new VMResponse();
+
+            if (ModelState.IsValid)
+            {
+                response = categoryTryService.Create(dataView);
+
+                if (response.Success)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            response.Entity = dataView;
+            return View(response.Entity);
         }
     }
 }

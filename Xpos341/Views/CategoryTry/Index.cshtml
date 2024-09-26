@@ -9,6 +9,11 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">@ViewData["Title"]</h5>
+
+        <button type="button" class="btn btn-primary" id="btn_create">Create</button>
+
+        
+
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -33,7 +38,13 @@
                     </tr>
                 }
             </tbody>
-
         </table>
     </div>
 </div>
+<script>
+    $("#btn_create").click(function () {
+        $("#modal_body").empty()
+        $("#modal_body").load("/CategoryTry/Create")
+        $("#my_modal").modal('show')
+    })
+</script>
