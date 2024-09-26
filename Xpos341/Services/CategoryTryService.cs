@@ -8,8 +8,8 @@ namespace Xpos341.Services
     public class CategoryTryService
     {
         private readonly Xpos341Context db;
-        VMResponse response = new VMResponse();
         int IdUser = 1;
+        VMResponse response = new VMResponse();
 
         public CategoryTryService(Xpos341Context _db)
         {
@@ -36,7 +36,7 @@ namespace Xpos341.Services
 
             return dataView;
         }
-        
+        [HttpPost]
         public VMResponse Create(VMTblCategory dataView)
         {
             TblCategory dataModel = GetMapper().Map<TblCategory>(dataView);
@@ -55,7 +55,7 @@ namespace Xpos341.Services
             catch (Exception ex)
             {
                 response.Success = false;
-                response.Message = "Failed saved :" + ex.Message;
+                response.Message = "Failed saved : " + ex.Message;
                 response.Entity = dataView;
             }
             return response;
