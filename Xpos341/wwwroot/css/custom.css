@@ -1,0 +1,25 @@
+﻿namespace Xpos341.wwwroot.css {
+    public class Custom
+
+{
+}
+
+}
+
+.action {
+    padding-right : 50%;
+    display: flex;
+    gap: 10px;
+    justify-content:flex-end;
+}
+
+.action_btn {
+/*    flex: ;*/
+}
+.table th{
+    text-align: center; /* Optional: Center text */
+}
+..table td {
+    text-align: start; /* Optional: Center text */
+
+}
