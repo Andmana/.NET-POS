@@ -6,15 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace xpos341.datamodels;
 
-[Table("TblCategory")]
-public partial class TblCategory
+[Table("TblVariant")]
+public partial class TblVariant
 {
     [Key]
     public int Id { get; set; }
 
+    public int IdCategory { get; set; }
+
     [StringLength(50)]
     [Unicode(false)]
-    public string NameCategory { get; set; } = null!;
+    public string NameVariant { get; set; } = null!;
 
     [Unicode(false)]
     public string? Description { get; set; }

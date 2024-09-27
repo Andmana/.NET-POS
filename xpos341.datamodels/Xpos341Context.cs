@@ -17,6 +17,8 @@ public partial class Xpos341Context : DbContext
 
     public virtual DbSet<TblCategory> TblCategories { get; set; }
 
+    public virtual DbSet<TblVariant> TblVariants { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.;Initial Catalog=XPOS_341; Trusted_Connection=True; TrustServerCertificate=True");
@@ -25,16 +27,12 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC079B8E5BC3");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07AC714718");
+        });
 
-            entity.ToTable("TblCategory");
-
-            entity.Property(e => e.CreateDate).HasColumnType("datetime");
-            entity.Property(e => e.Description).IsUnicode(false);
-            entity.Property(e => e.NameCategory)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.UpdateDate).HasColumnType("datetime");
+        modelBuilder.Entity<TblVariant>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC076120854B");
         });
 
         OnModelCreatingPartial(modelBuilder);
