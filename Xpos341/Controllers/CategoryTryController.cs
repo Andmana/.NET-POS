@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using xpos341.datamodels;
 using xpos341.viewmodels;
 using Xpos341.Services;
@@ -46,5 +48,56 @@ namespace Xpos341.Controllers
             response.Entity = dataView;
             return View(response.Entity);
         }
+
+        public IActionResult Edit(int id)
+        {
+            VMTblCategory dataView = categoryTryService.GetById(id);
+            return PartialView(dataView);
+        }
+                
+        [HttpPost]
+        public IActionResult Edit(VMTblCategory dataView)
+        {
+            VMResponse response = new VMResponse();
+
+            if (ModelState.IsValid)
+            {
+                response = categoryTryService.Edit(dataView);
+
+                if (response.Success)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            response.Entity = dataView;
+            return View(response.Entity);
+        }
+
+        public IActionResult Detail(int id)
+        {
+            VMTblCategory dataView = categoryTryService.GetById(id);
+            return PartialView(dataView);
+        }
+
+
+        public IActionResult Delete(int id)
+        {
+            VMTblCategory dataView = categoryTryService.GetById(id);
+            return PartialView(dataView);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(VMTblCategory dataView)
+        {
+            VMResponse response = new VMResponse();
+            response = categoryTryService.Delete(dataView);
+            if (response.Success)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(response.Entity);
+        }
+
+
     }
 }

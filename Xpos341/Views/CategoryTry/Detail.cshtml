@@ -1,0 +1,46 @@
+﻿@using xpos341.viewmodels;
+@model VMTblCategory;
+@{
+    ViewData["Title"] = "Edit Category Try";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="h4 mb-4">@ViewData["Title"]</div>
+
+        <div class="mb-4 row">
+            <label for="NameCategory" class="col-sm-4 col-form-label">Name Category</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control bg-white" id="NameCategory" name="NameCategory" value="@Model.NameCategory" readonly />
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <label for="Description" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control bg-white" id="Description" name="Description" value="@Model.Description" readonly />
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <label for="CreateDate" class="col-sm-4 col-form-label">CreateDate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control bg-white" id="CreateDate" name="CreateDate" value="@Model.CreateDate" readonly />
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <label for="UpdateDate" class="col-sm-4 col-form-label">UpdateDate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control bg-white" id="UpdateDate" name="UpdateDate" value="@Model.UpdateDate" readonly />
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <div class="col-sm-10">
+                <a class="btn btn-light fw-bold" asp-controller="CategoryTry" asp-action="Index" readonly> Back to list</a>
+            </div>
+        </div>
+
+    </div>
+</div>

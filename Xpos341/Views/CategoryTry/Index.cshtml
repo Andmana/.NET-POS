@@ -4,17 +4,15 @@
 *@
 @{
     ViewData["Title"] = "Category Try";
+    int idx = 1;
 }
 
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">@ViewData["Title"]</h5>
 
-        <button type="button" class="btn btn-primary" id="btn_create">Create</button>
-
-        
-
-        <table class="table table-hover">
+        <button type="button" class="btn btn-primary my-2" id="btn_create">Create</button>
+        <table class="table table-hover table-bordered">
             <thead>
                 <tr>
                     <th scope="col"> Id </th>
@@ -27,24 +25,57 @@
                 @foreach (VMTblCategory item in Model)
                 {
                     <tr>
-                        <td scope="row">@item.Id</td>
+                        <td scope="row" class="text-center">@idx</td>
                         <td scope="row">@item.NameCategory</td>
                         <td scope="row">@item.Description</td>
-                        <td scope="row" class="btn-group">
-                            <a class="btn btn-primary">Edit</a>
-                            <a class="btn btn-success">Detail</a>
-                            <a class="btn btn-danger">Delete</a>
+                        <td scope="row" class="btn-group w-100 px-5" >
+
+                            <a class="btn btn-primary btn_edit" data-id="@item.Id">Edit</a>
+                            <a class="btn btn-info btn_detail" data-id="@item.Id">Detail</a>
+                            <a class="btn btn-warning btn_delete" data-id="@item.Id">Delete</a>
+
                         </td>
                     </tr>
+                     idx++;
                 }
             </tbody>
         </table>
     </div>
 </div>
 <script>
-    $("#btn_create").click(function () {
-        $("#modal_body").empty()
-        $("#modal_body").load("/CategoryTry/Create")
-        $("#my_modal").modal('show')
+    $('#btn_create').click(function () {
+        $('#modal_body').empty()
+        $('#modal_body').load('/CategoryTry/Create')
+        $('#my_modal').modal('show')
     })
+
+    $('.btn_edit').click(function(){
+        var id = $(this).data('id');
+
+        $('#modal_body').empty()
+        $('#modal_body').load('/CategoryTry/Edit?id=' + id)
+        $('#my_modal').modal('show')
+
+    })
+
+    $('.btn_detail').click(function () {
+
+        var id = $(this).data('id')
+
+            $('#modal_body').empty()
+            $('#modal_body').load('/CategoryTry/Detail?id=' + id)
+            $('#my_modal').modal('show')
+    })
+
+    $('.btn_delete').click(function () {
+
+        var id = $(this).data('id')
+
+        // alert(id)
+        $('#modal_body').empty()
+        $('#modal_body').load('/CategoryTry/Delete?id=' + id)
+        $('#my_modal').modal('show')
+    })
+
+
 </script>
