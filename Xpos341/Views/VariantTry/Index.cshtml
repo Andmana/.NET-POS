@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Variant Try";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title"> @ViewData["Title"]</h1>
+        <table class="table table-Light table-striped table-bordered table-hover w-100">
+            <thead>
+                <tr class="w-auto">
+                    <th scope="col w-auto">Id</th>
+                    <th scope="col w-auto">Name Variant</th>
+                    <th scope="col w-auto">Name Category</th>
+                    <th scope="col w-auto">Description</th>
+                    <th scope="col w-auto text-center ">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">1</td>
+                    <td>Jus Melon</td>
+                    <td>Drink</td>
+                    <td>Desc of Jus Melon</td>
+                    <td class="action btn-group w-100 px-5" style="justify-content:center">
+                        <a class="btn btn-warning" href="#">Edit</a>
+                        <a class="btn btn-primary" href="#">Detail</a>
+                        <a class="btn btn-danger" href="#">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
