@@ -34,7 +34,6 @@
                 </div>
             </div>
 
-
             <table class="table table-Light table-striped table-bordered table-hover w-100">
                 <thead>
                     <tr class="w-auto">
@@ -87,7 +86,6 @@
                     }
                 </tbody>
             </table>
-
             <div class="row mb-3">
                 <div class="col-sm-12">
                     <div class="d-flex justify-content-between">
@@ -100,7 +98,7 @@
                                     class="form-control form-control-sm w-auto">
                                 <option value="3">3</option>
                                 <option value="5">5</option>
-                                <option value="5">10</option>
+                                <option value="10">10</option>
                             </select>
                             <div class="ml-2">
                                 Entries from @Model.TotalData data
@@ -135,7 +133,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </form>
     </div>
 </div>
@@ -148,7 +146,7 @@
 
     $("#btn_reset").click(function () {
         $("#sort_change").val("")
-            #("#form_search").submit()
+        $("#form_search").submit()
     })
 
     $("#select_show").val("@ViewBag.currenntShowData")
@@ -158,3 +156,4 @@
         $("#form_search").submit()
     })
 </script>
+

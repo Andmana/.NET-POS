@@ -27,9 +27,11 @@ namespace Xpos341.Controllers
             ViewBag.currentSort = pg.sortOrder;
             ViewBag.currentShowData = pg.showData;
 
-            if (pg.searchString != null) { 
+            if (pg.searchString != null)
+            {
                 pg.pageNumber = 1;
-            } else
+            }
+            else
             {
                 pg.searchString = pg.currentFilter;
             }
@@ -40,15 +42,15 @@ namespace Xpos341.Controllers
 
             if (!string.IsNullOrEmpty(pg.searchString))
             {
-                   dataView = dataView.Where(a => a.NameVariant.ToLower() == pg.searchString.ToLower()
-                                               || a.NameCategory.ToLower() == pg.searchString.ToLower())
-                                      .ToList();
+                dataView = dataView.Where(a => a.NameVariant.ToLower().Contains(pg.searchString.ToLower())
+                                            || a.NameCategory.ToLower().Contains(pg.searchString.ToLower()))
+                                   .ToList();
             }
 
             switch (pg.sortOrder)
             {
                 case "name_desc":
-                    dataView = dataView.OrderByDescending(a => a.NameVariant).ToList(); 
+                    dataView = dataView.OrderByDescending(a => a.NameVariant).ToList();
                     break;
                 case "name":
                     dataView = dataView.OrderBy(a => a.NameVariant).ToList();
@@ -63,6 +65,7 @@ namespace Xpos341.Controllers
 
             int pageSize = pg.showData ?? 3;
             page = pg;
+            //return View(dataView);
 
             return View(PaginatedList<VMTblVariant>.CreateAsync(dataView, pg.pageNumber ?? 1, pageSize) );
         }

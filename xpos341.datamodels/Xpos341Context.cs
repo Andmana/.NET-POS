@@ -27,12 +27,12 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07AC714718");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07B84EC803");
         });
 
         modelBuilder.Entity<TblVariant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC076120854B");
+            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07ECF8CA2E");
         });
 
         OnModelCreatingPartial(modelBuilder);
