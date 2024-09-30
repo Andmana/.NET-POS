@@ -16,8 +16,8 @@
                         </button>
 
                         <div class="input-group w-50">
-                            <input type="text" class="form-control" id="searchString" name="searchString"
-                                   value="@ViewBag.currentFilter" placeholder="Search..    " />
+                            <input type="text" class="form-control" id="searchString" name="searchString" 
+                                value="@ViewBag.currentFilter" placeholder="Search..    " />
                             <div class="input-group-prepend">
                                 <div class="input-group-text" style="cursor:pointer" id="btn_search">
                                     <i class="fas fa-search"></i>
@@ -39,10 +39,11 @@
                 <thead>
                     <tr class="w-auto">
                         <th>
-                            <a asp-action="Index"
-                               asp-route-sortOrder="@ViewBag.idSort"
-                               asp-route-currentFilter="@ViewBag.currentFilter"
-                               asp-route-showData="@ViewBag.currentShowData">
+                            <a  asp-action="Index" 
+                                asp-route-sortOrder="@ViewBag.idSort"
+                                asp-route-currentFilter="@ViewBag.currentFilter"
+                                asp-route-showData="@ViewBag.currentShowData"
+                            >
                                 Id
                             </a>
                         </th>
@@ -54,16 +55,16 @@
                                 Name Variant
                             </a>
                         </th>
-                        <th>Name Category</th>
-                        <th>Description</th>
-                        <th>Action</th>
+                        <th >Name Category</th>
+                        <th >Description</th>
+                        <th >Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
                         if (Model.Count > 0)
                         {
-                            foreach (var item in Model)
+                            foreach(var item in Model)
                             {
                                 <tr>
                                     <td scope="row">@item.Id</td>
@@ -80,9 +81,9 @@
                         }
                         else
                         {
-                            <tr>
-                                <td colspan="5" class="text-center">Data Not Found</td>
-                            </tr>
+                             <tr>
+                                 <td colspan="5" class="text-center">Data Not Found</td>
+                             </tr>
                         }
                     }
                 </tbody>
@@ -95,8 +96,8 @@
                             <div class="mr-2">
                                 show
                             </div>
-                            <select name="showData" id="select_show"
-                                    aria-controls="zero-config"
+                            <select name="showData" id="select_show" 
+                                    aria-controls="zero-config" 
                                     class="form-control form-control-sm w-auto">
                                 <option value="3">3</option>
                                 <option value="5">5</option>
@@ -114,12 +115,13 @@
                         }
 
                         <div class="w-30">
-                            <a asp-action="Index"
+                            <a  asp-action="Index"
                                asp-route-sortOrder="@ViewBag.currentSort"
-                               asp-route-pageNumber="@(Model.PageIndex - 1)"
-                               asp-route-currentFilter="@ViewBag.currentFilter"
-                               asp-route-showData="@ViewBag.currentShowData"
-                               class="btn btn-primary @prevDisabled">
+                                asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                asp-route-currentFilter="@ViewBag.currentFilter"
+                                asp-route-showData="@ViewBag.currentShowData"
+                                class="btn btn-primary @prevDisabled"
+                            >
                                 Previous
                             </a>
                             Page @Model.PageIndex of @Model.TotalPages
@@ -146,9 +148,9 @@
         $("#form_search").submit()
     })
 
-    $("#btn_reset").click(function () {
+    $("#btn_reset").click(function (){
         $("#sort_change").val("")
-            #("#form_search").submit()
+        #("#form_search").submit()
     })
 
     $("#select_show").val("@ViewBag.currenntShowData")

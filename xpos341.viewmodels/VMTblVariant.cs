@@ -6,13 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 namespace xpos341.viewmodels
 {
-    internal class VMTblVariant
+    public class VMTblVariant
     {
         public int Id { get; set; }
 
         public int IdCategory { get; set; }
 
         public string NameVariant { get; set; } = null!;
+
+        public string NameCategory { get; set; } = null!;
 
         public string? Description { get; set; }
 
