@@ -38,21 +38,21 @@ create table TblVariant
 
 insert into TblVariant values
 (1 , 'Melon Juice', 'Desc of Jus Melon', 0, 1, GETDATE(), null, null),
-(2 , 'Ice Cream', 'Desc of Ice Cream', 0, 3, GETDATE(), null, null),
-(3 , 'Fried Chicken', 'Desc of Fried Chicken', 0, 2, GETDATE(), null, null),
-(4 , 'Soda', 'Desc of Soda', 0, 1, GETDATE(), null, null),
-(5 , 'Sprite', 'Desc of Sprite', 0, 1, GETDATE(), null, null),
-(6 , 'Fanta', 'Desc of Fanta', 0, 1, GETDATE(), null, null),
-(7 , 'Pizza', 'Desc of Pizza', 0, 2, GETDATE(), null, null),
-(8 , 'Burger', 'Desc of Burger', 0, 2, GETDATE(), null, null),
-(9 , 'Hamburger', 'Desc of Hamburger', 0, 2, GETDATE(), null, null),
-(10, 'Cake', 'Desc of Cake', 0, 3, GETDATE(), null, null),
-(11, 'Candy', 'Desc of Candy', 0, 3, GETDATE(), null, null),
-(12, 'Ice Tea', 'Desc of Ice Tea', 0, 1, GETDATE(), null, null),
-(13, 'Fries', 'Desc of Fries', 0, 2, GETDATE(), null, null),
-(14, 'Pork', 'Desc of Pork', 0, 2, GETDATE(), null, null),
-(15, 'Pie', 'Desc of Pie', 0, 3, GETDATE(), null, null),
-(16, 'Banana Fried', 'Desc of Banana Fried', 0, 3, GETDATE(), null, null);
+(3 , 'Ice Cream', 'Desc of Ice Cream', 0, 1, GETDATE(), null, null),
+(2 , 'Fried Chicken', 'Desc of Fried Chicken', 0, 2, GETDATE(), null, null),
+(1 , 'Soda', 'Desc of Soda', 0, 1, GETDATE(), null, null),
+(1 , 'Sprite', 'Desc of Sprite', 0, 1, GETDATE(), null, null),
+(1 , 'Fanta', 'Desc of Fanta', 0, 1, GETDATE(), null, null),
+(2 , 'Pizza', 'Desc of Pizza', 0, 2, GETDATE(), null, null),
+(2 , 'Burger', 'Desc of Burger', 0, 2, GETDATE(), null, null),
+(2 , 'Hamburger', 'Desc of Hamburger', 0, 2, GETDATE(), null, null),
+(3, 'Cake', 'Desc of Cake', 0, 1, GETDATE(), null, null),
+(3, 'Candy', 'Desc of Candy', 0, 2, GETDATE(), null, null),
+(1, 'Ice Tea', 'Desc of Ice Tea', 0, 1, GETDATE(), null, null),
+(2, 'Fries', 'Desc of Fries', 0, 1, GETDATE(), null, null),
+(2, 'Pork', 'Desc of Pork', 0, 2, GETDATE(), null, null),
+(3, 'Pie', 'Desc of Pie', 0, 1, GETDATE(), null, null),
+(3, 'Banana Fried', 'Desc of Banana Fried', 0, 1, GETDATE(), null, null);
 
 select * from TblVariant;
 
