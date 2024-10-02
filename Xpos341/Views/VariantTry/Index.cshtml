@@ -55,6 +55,7 @@
                         </th>
                         <th>Name Category</th>
                         <th>Description</th>
+                        <th>Create Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -69,10 +70,11 @@
                                     <td>@item.NameVariant</td>
                                     <td>@item.NameCategory</td>
                                     <td>@item.Description</td>
-                                    <td class="action btn-group text-white">
-                                        <a class="btn btn-warning" href="#">Edit</a>
-                                        <a class="btn btn-primary" href="#">Detail</a>
-                                        <a class="btn btn-danger" href="#">Delete</a>
+                                    <td>@item.CreateDate.ToString("dddd, dd-MM-yyyy hh:mm:ss")</td>
+                                    <td class="action btn-group text-white w-100 px-2 border-0">
+                                        <a class="btn btn-warning btn_edit" data-id="@item.Id" href="#">Edit</a>
+                                        <a class="btn btn-primary btn_detail" data-id="@item.Id" href="#">Detail</a>
+                                        <a class="btn btn-danger btn_delete" data-id="@item.Id" href="#">Delete</a>
                                     </td>
                                 </tr>
                             }
@@ -117,6 +119,7 @@
                                asp-route-pageNumber="@(Model.PageIndex - 1)"
                                asp-route-currentFilter="@ViewBag.currentFilter"
                                asp-route-showData="@ViewBag.currentShowData"
+                               asp-route-searchString="@ViewBag.currentFilter"
                                class="btn btn-primary @prevDisabled">
                                 Previous
                             </a>
@@ -126,6 +129,7 @@
                                asp-route-pageNumber="@(Model.PageIndex + 1)"
                                asp-route-currentFilter="@ViewBag.currentFilter"
                                asp-route-showData="@ViewBag.currentShowData"
+                               asp-route-searchString="@ViewBag.currentFilter"
                                class="btn btn-primary @nextDisabled">
                                 Next
                             </a>
@@ -139,13 +143,44 @@
 </div>
 
 <script>
+    $("#btn_create").click(function(){
+        $("#modal_body").empty()
+        $("#modal_body").load("/VariantTry/Create")
+        $("#my_modal").modal("show")
+    })
+
+    $(".btn_edit").click(function () {
+        var id = $(this).data("id")
+
+        $("#modal_body").empty()
+        $("#modal_body").load("/VariantTry/Edit?id=" + id)
+        $("#my_modal").modal("show")
+    })
+
+    $(".btn_detail").click(function () {
+        var id = $(this).data("id")
+
+        $("#modal_body").empty()
+        $("#modal_body").load("/VariantTry/Detail?id=" + id)
+        $("#my_modal").modal("show")
+    })
+
+    $(".btn_delete").click(function () {
+        var id = $(this).data("id")
+
+        $("#modal_body").empty()
+        $("#modal_body").load("/VariantTry/Delete?id=" + id)
+        $("#my_modal").modal("show")
+    })
+
     $("#btn_search").click(function () {
-        $("#sort_change").val("ViewBag.currentSort")
+        $("#sort_change").val("@ViewBag.currentSort")
         $("#form_search").submit()
     })
 
     $("#btn_reset").click(function () {
         $("#sort_change").val("")
+        $("#searchString").val("")
         $("#form_search").submit()
     })
 

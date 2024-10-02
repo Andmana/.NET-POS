@@ -1,0 +1,20 @@
+﻿@using xpos341.viewmodels;
+@model VMTblVariant;
+@{
+    ViewData["Title"] = "Delete Variant Try";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="h4 mb-4">@ViewData["Title"]</div>
+    </div>
+    <div class="card-body">
+        <div>Are you sure delete this Variant <strong>@Model.NameVariant</strong> </div>
+        <div>
+            <form asp-action="Delete" method="post">
+                <input type="hidden" name="Id" Id="Id" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>

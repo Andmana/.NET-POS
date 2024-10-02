@@ -29,14 +29,16 @@ namespace Xpos341.Controllers
 
             if (pg.searchString != null)
             {
-                pg.pageNumber = 1;
+                //pg.pageNumber = pg.;
+
+
             }
             else
             {
-                pg.searchString = pg.currentFilter;
+                pg.currentFilter = pg.searchString; 
             }
 
-            ViewBag.currentFilter = pg.currentFilter;
+            ViewBag.currentFilter = pg.searchString;
 
             List<VMTblVariant> dataView = variantTryService.GetAllData();
 
@@ -45,6 +47,7 @@ namespace Xpos341.Controllers
                 dataView = dataView.Where(a => a.NameVariant.ToLower().Contains(pg.searchString.ToLower())
                                             || a.NameCategory.ToLower().Contains(pg.searchString.ToLower()))
                                    .ToList();
+                //ViewBag.searchString = pg.searchString;
             }
 
             switch (pg.sortOrder)
@@ -68,6 +71,75 @@ namespace Xpos341.Controllers
             //return View(dataView);
 
             return View(PaginatedList<VMTblVariant>.CreateAsync(dataView, pg.pageNumber ?? 1, pageSize) );
+        }
+
+        public IActionResult Create()
+        {
+            VMTblCategory dataView = new VMTblCategory();
+            ViewBag.DropdownCategory = categoryTryService.GetAllData();
+            
+            return PartialView(dataView);
+        }
+
+        [HttpPost]
+        public IActionResult Create(VMTblVariant dataView)
+        {
+            VMResponse response = new VMResponse();
+            response = variantTryService.Create(dataView);
+
+            if (response.Success)
+                return RedirectToAction("Index");
+
+            ViewBag.DropdownCategory = categoryTryService.GetAllData();
+            response.Entity = dataView;
+
+            return View(response.Entity);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            VMTblVariant dataView = variantTryService.GetById(id);
+            ViewBag.DropdownCategory = categoryTryService.GetAllData();
+
+            return PartialView(dataView);
+        }
+        [HttpPost]
+        public IActionResult Edit(VMTblVariant dataView)
+        {
+            VMResponse response = new VMResponse();
+            response = variantTryService.Edit(dataView);
+
+            if (response.Success)
+                return RedirectToAction("Index", page);
+
+            ViewBag.DropdownCategory = categoryTryService.GetAllData();
+            response.Entity = dataView;
+
+            return View(response.Entity);
+        }
+
+        public IActionResult Detail(int id)
+        {
+            VMTblVariant dataView = variantTryService.GetById(id);
+            ViewBag.DropdownCategory = categoryTryService.GetAllData();
+
+            return PartialView(dataView);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            VMTblVariant dataView = variantTryService.GetById(id);
+            ViewBag.DropdownCategory = categoryTryService.GetAllData();
+
+            return PartialView(dataView);
+        }
+        [HttpPost]
+        public IActionResult Delete(VMTblVariant dataView)
+        {
+            VMResponse response = variantTryService.Delete(dataView);
+            if (response.Success)
+                return RedirectToAction("index", page);
+            return View(response.Entity);
         }
     }
 }

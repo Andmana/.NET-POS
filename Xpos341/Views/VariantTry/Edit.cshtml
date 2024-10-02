@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Edit Form Variant Try";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="h4 mb-4">@ViewData["Title"]</div>
+
+        <form asp-action="Edit" method="post" id="form_edit">
+
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+
+            <div class="mb-4 row">
+                <label for="NameVariant" class="col-sm-4 col-form-label">Name Variant</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="NameVariant" name="NameVariant" value="@Model.NameVariant" />
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="IdCategory" class="col-sm-4 col-form-label">Name Category</label>
+                <div class="col-sm-8">
+
+                    @* IHTML helper *@
+                    @Html.DropDownList("IdCategory",
+                             new SelectList(ViewBag.DropdownCategory, "Id", "NameCategory"),
+                             "--Pilih Category--",
+                             new { @class = "form-control" }
+
+                             )
+
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="Description" class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Description" name="Description" value="@Model.Description" />
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-light fw-bold" asp-controller="VariantTry" asp-action="Index"> Back to list</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#form_edit").validate({
+        errorClass:"text-danger",
+        rules: {
+            NameVariant: {
+                required: true,
+                minLength: 3,
+            },
+            IdCategory: "required"
+        },
+        messages: {
+            NameVariant: {
+                required: "Please fill variant",
+                minLength: "Minimal character is 3"
+            },
+            IdCategory : "Please choose the category"
+
+        }
+    })
+</script>
