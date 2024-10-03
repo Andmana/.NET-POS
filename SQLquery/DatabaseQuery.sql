@@ -15,12 +15,14 @@ create table TblCategory
 	UpdateDate		datetime
 );
 
-select * from TblCategory;
 
 insert into TblCategory(NameCategory, Description, IsDelete, CreateBy, CreateDate, UpdateBy,UpdateDate) values
 ('Drink', 'Desc of drinks', 0, 1, GETDATE(), null, null),
 ('Food', 'Desc of Food', 0, 2, GETDATE(), null, null),
-('Dessert', 'Desc of Dessert', 0, 1, GETDATE(), null, null);
+('Dessert', 'Desc of Dessert', 0, 1, GETDATE(), null, null),
+('Fruit', 'Desc of Fruit', 0, 2, GETDATE(), null, null),
+('Vegetables', 'Desc of Vegetables', 0, 2, GETDATE(), null, null);
+select * from TblCategory;
 
 drop table if exists TblVariant;
 create table TblVariant

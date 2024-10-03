@@ -1,0 +1,116 @@
+﻿@using xpos341.datamodels;
+@model TblCategory;
+@{
+    Layout = null;
+    ViewData["Title"] = "Add Category";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="h4 mb-4">@ViewData["Title"]</div>
+
+        <form asp-action="Create" method="post" id="form_input">
+
+            <div class="mb-4 row">
+                <label for="NameCategory" class="col-sm-4 col-form-label">Name Category</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="NameCategory" name="NameCategory" value="" />
+                    <span id="validate_NameCategory" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="Description" class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Description" name="Description" value="" />
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-light fw-bold" asp-controller="Category" asp-action="Index"> Back to list</a>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    $("#form_input").validate({
+        errorClass:"text-danger",
+        rules: {
+            NameCategory: {
+                required: true,
+                minlength: 3,
+            },
+        },
+        messages: {
+            NameCategory: {
+                required: "Please fill category name",
+                minLength: "Minimal character is 3"
+            }
+            
+        },
+        submitHandler: function (form) {
+
+            var dataForm = $(form).serialize()
+
+            var id = 0
+            var nameCategory = $("#NameCategory").val()
+
+            $.ajax({
+                url: "/Category/CheckNameExist",
+                type: "get",
+                // method: "get" sama aja
+                data : {nameCategory : nameCategory,
+                        id : id},
+                dataType : "json",
+                success : function (response){
+                    if (response) 
+                    {
+                        $("#validate_NameCategory").text("Name Category is already exists")
+                        return true
+                    }
+                    else 
+                    {
+                        fungsiSubmit(dataForm)
+                    }
+                    
+                }
+            })
+        }
+    })
+    function fungsiSubmit(dataParam){
+        $.ajax({
+            url: "/Category/Create",
+            type: "post",
+            data : dataParam,
+            dataType: "json",
+            success : function (response){
+                var data = response.dataResponse
+                if(data.success){
+                    $("#my_modal").modal("hide")
+                    toastr.success(
+                        data.message,
+                        "",
+                        {
+                            timeOut: 500,
+                            fadeOut: 500,
+                            onHidden: function(){
+                                window.location.reload()
+                            }
+                        }
+                    )
+                }
+                else{
+                    toastr.errorClass(data.message)
+                }
+
+            }
+
+        })
+    }
+</script>

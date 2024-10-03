@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using xpos341.datamodels;
+using Xpos341.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<CategoryService>();
 
 // Add Coneection String
 builder.Services.AddDbContext<Xpos341Context>(option =>

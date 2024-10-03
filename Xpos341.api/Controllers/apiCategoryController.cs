@@ -76,7 +76,7 @@ namespace Xpos341.api.Controllers
                 response.Message = "Failed to save : " + ex.Message;
 
             }
-            response.Entity = data;
+            //response.Entity = data;
 
             return response;
         }
@@ -124,7 +124,7 @@ namespace Xpos341.api.Controllers
 
             if (dt != null)
             {
-                dt.IsDelete = false;
+                dt.IsDelete = true;
                 dt.UpdateBy = createBy;
                 dt.UpdateDate = DateTime.Now;
 

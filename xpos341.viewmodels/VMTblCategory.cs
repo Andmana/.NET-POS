@@ -16,7 +16,7 @@ namespace xpos341.viewmodels
         [MinLength(3, ErrorMessage = "Isi Minimum 3 Karakter")]
         public string NameCategory { get; set; } = null!;
 
-        [Required(ErrorMessage = "Harap isi nama Description, jangan kosong..!")]
+        //[Required(ErrorMessage = "Harap isi nama Description, jangan kosong..!")]
         public string? Description { get; set; }
 
         public bool? IsDelete { get; set; }
