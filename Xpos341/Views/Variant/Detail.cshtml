@@ -1,0 +1,44 @@
+﻿@using xpos341.viewmodels;
+@model VMTblVariant;
+@{
+    Layout = null;
+    ViewData["Title"] = "Detail Variant";
+}
+<div class="card">
+    <div class="card-body">
+
+        <h1 class="card-title mb-1">@ViewData["Title"]</h1>
+
+        <div class="mb-4 row">
+            <label for="NameVariant" class="col-sm-4 col-form-label">Name Variant</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="NameVariant" name="NameVariant" value="@Model.NameVariant" readonly/>
+                <span id="validate_NameVariant" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <label for="Description" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Description" name="Description" value="@Model.Description" readonly/>
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <label for="Description" class="col-sm-4 col-form-label">Category</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Description" name="Description" value="@Model.NameCategory" readonly/>
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <div class="col-sm-10">
+                <a class="btn btn-light fw-bold" asp-controller="Variant" asp-action="Index"> Back to list</a>
+            </div>
+        </div>
+
+
+            
+
+    </div>
+</div>

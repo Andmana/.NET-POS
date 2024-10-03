@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<VariantService>();
 
 // Add Coneection String
 builder.Services.AddDbContext<Xpos341Context>(option =>

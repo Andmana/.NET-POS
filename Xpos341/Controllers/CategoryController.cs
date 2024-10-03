@@ -52,7 +52,6 @@ namespace Xpos341.Controllers
                 default:
                     data = data.OrderBy(a => a.NameCategory).ToList(); break;
             }
-            //return View(PaginatedList<VMTblVariant>.CreateAsync(dataView, pg.pageNumber ?? 1, pageSize));
 
             return View(PaginatedList<TblCategory>.CreateAsync(data, pageNumber ?? 1, pageSize ?? 3));
         }

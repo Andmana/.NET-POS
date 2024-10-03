@@ -1,0 +1,142 @@
+﻿@using xpos341.viewmodels;
+@model VMTblVariant;
+@{
+    Layout = null;
+    ViewData["Title"] = "Add Category";
+}
+
+<div class="card">
+    <div class="card-body">
+
+        <form asp-action="Create" method="post" id="form_input">
+
+            <div class="mb-4 row">
+                <label for="NameVariant" class="col-sm-4 col-form-label">Name Variant</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="NameVariant" name="NameVariant" value="" />
+                    <span id="validate_NameVariant" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="Description" class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Description" name="Description" value="" />
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="IdCategory" class="col-sm-4 col-form-label">Name Category</label>
+                <div class="col-sm-8">
+
+                    @* IHTML helper *@
+                    @Html.DropDownList("IdCategory",
+                             new SelectList(ViewBag.DropdownCategory, "Id", "NameCategory"),
+                             "--Pilih Category--",
+                             new { @class = "form-control" }
+
+                             )
+
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-light fw-bold" asp-controller="Variant" asp-action="Index"> Back to list</a>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    $("#form_input").validate({
+        errorClass:"text-danger",
+        rules: {
+            NameVariant: {
+                required: true,
+                minlength: 3,
+            }, IdCategory : {
+                required: true
+            }
+        },
+        messages: {
+            NameVariant: {
+                required: "Please fill Variant name",
+                minLength: "Minimal character is 3"
+            },IdCategory: {
+                required: "Please select category"
+            }
+
+        },
+        submitHandler: function (form) {
+
+            var dataForm = $(form).serialize()
+
+            var id = 0
+            var nameVariant = $("#NameVariant").val()
+            var idCategory = $("#IdCategory").val()
+            var nameCategory = $("#IdCategory option:selected").text()
+
+
+            $.ajax({
+                url: "/Variant/CheckNameExist",
+                type: "get",
+                // method: "get" sama aja
+                data: {
+                    nameVariant: nameVariant,
+                    id: id,
+                    idCategory: idCategory
+                },
+                dataType : "json",
+                success : function (response){
+                    if (response && nameVariant.length >= 3)
+                    {
+                        $("#validate_NameVariant").empty().text(`Name Variant is already exists in category "${nameCategory}"`)
+                        return true
+                    }
+                    else
+                    {
+                        fungsiSubmit(dataForm)
+                    }
+
+                }
+            })
+        }
+    })
+    function fungsiSubmit(dataParam){
+        $.ajax({
+            url: "Variant/Create",
+            type: "post",
+            data : dataParam,
+            dataType: "json",
+            success : function (response){
+                var data = response.dataResponse
+                if(data.success){
+                    $("#my_modal").modal("hide")
+                    toastr.success(
+                        data.message,
+                        "",
+                        {
+                            timeOut: 500,
+                            fadeOut: 500,
+                            onHidden: function(){
+                                window.location.reload()
+                            }
+                        }
+                    )
+                }
+                else{
+                    toastr.errorClass(data.message)
+                }
+
+            }, error : function (response) {
+                console.log(response)
+            }
+
+        })
+    }
+</script>
