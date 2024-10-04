@@ -48,7 +48,7 @@ insert into TblVariant values
 (3, 'Ice Cream', 'Desc of Ice Cream', 0, 1, GETDATE(), null, null),
 (3, 'Cake', 'Desc of Cake', 0, 1, GETDATE(), null, null),
 (4, 'Mango', 'Desc of Mango', 0, 1, GETDATE(), null, null),
-(5, 'Tomtato', 'Desc of Pie', 0, 1, GETDATE(), null, null),
+(5, 'Tomtato', 'Desc of Pie', 0, 1, GETDATE(), null, null);
 
 select * from TblVariant;
 
@@ -70,3 +70,9 @@ create table TblProduct
 	UpdateBy		int,
 	UpdateDate		datetime
 )
+
+insert into TblProduct values
+(6, 'Chess Pizza', 100000, 100, '', 0, 1, GETDATE(), null, null),
+(6, 'Paperoni Pizza', 100000, 100, '', 0, 1, GETDATE(), null, null);
+
+select * from TblProduct;
