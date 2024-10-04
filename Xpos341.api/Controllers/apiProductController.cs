@@ -6,7 +6,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Xpos341.api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class apiProductController : ControllerBase
     {
@@ -25,8 +25,8 @@ namespace Xpos341.api.Controllers
         {
             List<VMTblProduct> data = (from p in db.TblProducts
                                        join v in db.TblVariants on p.IdVariant equals v.Id
-                                       join c in db.TblCategories on v.IdCategory equals c.Id into tc
-                                       from tcategory in tc.DefaultIfEmpty()
+                                       join c in db.TblCategories on v.IdCategory equals c.Id 
+                                       //into tc from tcategory in tc.DefaultIfEmpty()
                                        where p.IsDelete == false && v.IsDelete == false
                                        select new VMTblProduct
                                        {
@@ -40,7 +40,7 @@ namespace Xpos341.api.Controllers
                                            NameVariant = v.NameVariant,
 
                                            IdCategory = v.IdCategory,
-                                           NameCategory = tcategory.NameCategory ?? "[Blank]",
+                                           NameCategory = c.NameCategory ?? "[Blank]",
 
                                            CreateDate = p.CreateDate
                                        }).ToList();
@@ -77,7 +77,7 @@ namespace Xpos341.api.Controllers
             return data;
         }
 
-        [HttpGet("CheckByName/{name}/{id}/{idCategory}")]
+        [HttpGet("CheckByName/{name}/{id}/{idVariant}")]
         public bool CheckName(string name, int id, int idVariant)
         {
             TblProduct data = new TblProduct();

@@ -1,0 +1,192 @@
+﻿@using xpos341.datamodels;
+@model TblProduct;
+@{
+    Layout = null;
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="card">
+    <div class="card-body">
+
+        <form asp-action="Create" method="post" id="form_input">
+
+            <div class="mb-4 row">
+                <label for="NameProduct" class="col-sm-4 col-form-label">Name Product</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="NameProduct" name="NameProduct" value="" />
+                    <span id="validate_NameProduct" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="IdCategory" class="col-sm-4 col-form-label">Name Category</label>
+                <div class="col-sm-8">
+
+                    @* IHTML helper *@
+                    @Html.DropDownList("IdCategory",
+                             new SelectList(ViewBag.DropdownCategory, "Id", "NameCategory"),
+                             "--Pilih Category--",
+                             new { @class = "form-control" }
+
+                             )
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="IdVariant" class="col-sm-4 col-form-label">Name Variant</label>
+                <div class="col-sm-8">
+
+                    @* IHTML helper *@
+                    @Html.DropDownList("IdVariant",
+                             new SelectList(ViewBag.DropdownVariant, "Id", "NameVariant"),
+                             "--Pilih Variant--",
+                             new { @class = "form-control" }
+
+                             )
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="Price" class="col-sm-4 col-form-label">Price</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Price" name="Price" value="" />
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="Stock" class="col-sm-4 col-form-label">Stock</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Stock" name="Stock" value="" />
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label for="Image" class="col-sm-4 col-form-label">Image</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Image" name="Image" value="/Image/" />
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-light fw-bold" asp-controller="Product" asp-action="Index"> Back to list</a>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    $("#form_input").validate({
+        errorClass: "text-danger",
+        rules: {
+            NameProduct: {
+                required: true,
+                minlength: 3,
+            }, 
+            IdCategory: "required",
+            IdVariant: "required",
+            Price: {
+                required: true,
+                number: true,
+                min: 0.01  // Minimum value greater than 0
+            },
+            Stock: {
+                required: true,
+                digits: true,  // Ensures only whole numbers
+                min: 1  // Minimum value greater than 0
+            }
+            // Image...........
+        },
+        messages: {
+            NameProduct: {
+                required: "Please fill Product name",
+                minLength: "Minimal character is 3"
+            },
+            IdVariant: {
+                required: "Please select variant"
+            },
+            IdCategory: {
+                required: "Please select category"
+            },
+            Price: {
+                required: "Please enter the price",
+                number: "Please enter a valid number",
+                min: "Price must be greater than 0"
+            },
+            Stock: {
+                required: "Please enter the stock",
+                digits: "Stock must be a whole number",
+                min: "Stock must be at least 1"
+            }
+            //Image..........
+
+        },
+        submitHandler: function (form) {
+
+            var dataForm = $(form).serialize()
+
+            var id = 0
+            var nameProduct = $("#NameProduct").val()
+            var idVariant = $("#IdVariant").val()
+            var nameVariant = $("#IdVariant option:selected").text()
+
+
+            $.ajax({
+                url: "/Product/CheckNameExist",
+                type: "get",
+                data: {
+                    nameProduct: nameProduct,
+                    id: id,
+                    idVariant: idVariant
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response && nameProduct.length >= 3) {
+                        $("#validate_NameProduct").empty().text(`Name Product is already exists in variant "${nameVariant}"`)
+                        return true
+                    }
+                    else {
+                        fungsiSubmit(dataForm)
+                    }
+
+                }
+            })
+        }
+    })
+    function fungsiSubmit(dataParam) {
+        $.ajax({
+            url: "Product/Create",
+            type: "post",
+            data: dataParam,
+            dataType: "json",
+            success: function (response) {
+                var data = response.dataResponse
+                if (data.success) {
+                    $("#my_modal").modal("hide")
+                    toastr.success(
+                        data.message,
+                        "",
+                        {
+                            timeOut: 500,
+                            fadeOut: 500,
+                            onHidden: function () {
+                                window.location.reload()
+                            }
+                        }
+                    )
+                }
+                else {
+                    toastr.errorClass(data.message)
+                }
+
+            }, error: function (response) {
+                console.log(response)
+            }
+
+        })
+    }
+</script>
