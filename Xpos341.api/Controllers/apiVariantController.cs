@@ -169,6 +169,7 @@ namespace Xpos341.api.Controllers
 
             return response;
         }
+
         [HttpDelete("Delete/{id}")]
         public VMResponse Delete(int id)
         {
