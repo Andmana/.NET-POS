@@ -17,6 +17,8 @@ public partial class Xpos341Context : DbContext
 
     public virtual DbSet<TblCategory> TblCategories { get; set; }
 
+    public virtual DbSet<TblProduct> TblProducts { get; set; }
+
     public virtual DbSet<TblVariant> TblVariants { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,12 +29,17 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07B84EC803");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC0783538A73");
+        });
+
+        modelBuilder.Entity<TblProduct>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC07FA540494");
         });
 
         modelBuilder.Entity<TblVariant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07ECF8CA2E");
+            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07A336478F");
         });
 
         OnModelCreatingPartial(modelBuilder);
