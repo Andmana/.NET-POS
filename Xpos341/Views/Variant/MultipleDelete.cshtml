@@ -1,18 +1,19 @@
-﻿@using xpos341.viewmodels
-@model VMTblVariant
-
-@{
-    ViewData["Title"] = "Delete data Variant";
+﻿@{
+    ViewData["Title"] = "Delete Multiple Variant";
 }
 
 <div class="card">
     <div class="card-body">
         <div class="h4 mb-4">@ViewData["Title"]</div>
 
-        <div class="mb-4">Are you sure delete this Variant, <strong>@Model.NameVariant</strong> </div>
 
         <form asp-action="SureDelete" id="form_delete" method="post">
-            <input type="hidden" name="Id" Id="Id" value="@Model.Id" />
+
+            <div class="mb-4">Are you sure delete this Variants,  </div>
+            
+            @foreach(var item in ViewBag.listName){
+                <strong>@item</strong>
+            }
 
             <div class="modal-footer">
 
@@ -28,12 +29,11 @@
 <script>
     $("#form_delete").validate({
         submitHandler: function (form) {
-            var id = $("#Id").val()
 
             $.ajax({
-                url: "Variant/SureDelete",
+                url: "Variant/SureMultipleDelete",
                 type: "post",
-                data: { id: id },
+                data: { ids: ids },
                 dataType: "json",
                 success: function (res) {
                     var data = res.dataResponse

@@ -135,5 +135,35 @@ namespace Xpos341.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> MultipleDelete(List<int> ids)
+        {
+            List<string> listName = new List<string>();
+
+            foreach (int id in ids)
+            {
+                VMTblVariant data = await variantService.GetDataById(id);
+                listName.Add(data.NameVariant);
+            }
+
+            ViewBag.listName = listName;
+
+            return PartialView();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SureMultipleDelete (List<int> ids)
+        {
+            VMResponse response = await variantService.MultipleDelete(ids);
+
+            if (response.Success)
+            {
+                return Json(new { dataResponse = response });
+            }
+            return RedirectToAction("Index");
+
+        }
+
     }
 }
+

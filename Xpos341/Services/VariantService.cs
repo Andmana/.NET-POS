@@ -126,5 +126,31 @@ namespace Xpos341.Services
 
             return response;
         }
+
+        public async Task<VMResponse> MultipleDelete(List<int> ids)
+        {
+            //Proses convert dari objext ke string
+            string json = JsonConvert.SerializeObject(ids);
+
+            //proses ubah string ke json
+            StringContent content = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+
+            var request = await client.PutAsync(RouteAPI + "apiVariant/MultipleDelete", content);
+
+            if (request.IsSuccessStatusCode)
+            {
+                var apiResponse = await request.Content.ReadAsStringAsync();
+
+                response = JsonConvert.DeserializeObject<VMResponse>(apiResponse);
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = $"{request.StatusCode} : {request.ReasonPhrase}";
+            }
+
+            return response;
+        }
+
     }
 }

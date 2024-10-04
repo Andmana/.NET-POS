@@ -204,6 +204,41 @@ namespace Xpos341.api.Controllers
             return response;
         }
 
+        [HttpPut("MultipleDelete")]
+        public VMResponse MultipleDelete(List<int> ids)
+        {
+
+            if (ids.Count > 0)
+            {
+                foreach (int id in ids)
+                {
+                    TblVariant dt = db.TblVariants.Where(a => a.Id == id).FirstOrDefault();
+                    dt.IsDelete = true;
+                    dt.UpdateBy = idUser;
+                    dt.UpdateDate = DateTime.Now;
+
+                    db.Update(dt);
+                }
+                try
+                {
+                    db.SaveChanges();
+                    response.Message = "Data deleted successfully";
+                }
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Message = "Fail to delete : " + ex.Message;
+                }
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = "Data not found";
+            }
+
+            return response;
+        }
+
     }
 
 }
