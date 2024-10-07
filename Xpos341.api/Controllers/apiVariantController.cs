@@ -89,12 +89,12 @@ namespace Xpos341.api.Controllers
             return false;
         }
 
-        [HttpGet("GetDataByIdCategory")]
-        public List<VMTblVariant> GetDataByIdCategory(int idCategory)
+        [HttpGet("GetDataByIdCategory/{id}")]
+        public List<VMTblVariant> GetDataByIdCategory(int id)
         {
             List<VMTblVariant> data = (from v in db.TblVariants
                                        join c in db.TblCategories on v.IdCategory equals c.Id
-                                       where v.IsDelete == false && v.IdCategory == idCategory
+                                       where v.IsDelete == false && v.IdCategory == id
                                        select new VMTblVariant
                                        {
                                            Id = v.Id,
