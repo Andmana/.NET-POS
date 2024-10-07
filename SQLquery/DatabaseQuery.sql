@@ -98,10 +98,28 @@ drop table if exists TblOrderDetail
 create table TblOrderDetail
 (
 	Id				int primary key identity(1,1),
-	IdHeader		nvarchar(20) not null,
+	IdHeader		int not null,
 	IdProduct		int not null,
-	Qty				decimal (18,2) not null,
-	SumPrice		int not null,
+	Qty				int not null,
+	SumPrice		decimal (18,2) not null,
+
+	IsDelete		bit,
+	CreateBy		int not null,
+	CreateDate		datetime not null,
+	UpdateBy		int,
+	UpdateDate		datetime
+)
+
+drop table if exists TblCustomer
+create table TblCustomer
+(
+	Id				int primary key identity(1,1),
+	NameCustomer	nvarchar(50) not null,
+	Email			nvarchar(50) not null,
+	Password		nvarchar(50) not null,
+	Address			nvarchar(max) not null,
+	Phone			nvarchar(15) not null,
+	IdRole			nvarchar(50) not null,
 
 	IsDelete		bit,
 	CreateBy		int not null,
