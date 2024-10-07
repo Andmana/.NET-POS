@@ -1,9 +1,5 @@
 ﻿namespace Xpos341.wwwroot.css {
     public class Custom
-
-{
-}
-
 }
 
 .action {
@@ -22,4 +18,21 @@
 ..table td {
     text-align: start; /* Optional: Center text */
 
+}
+
+.images {
+    aspect-ratio: 1/1;
+    height: 200px;
+    width: 80%;
+    object-fit: cover;
+    margin : auto;
+}
+.images {
+    border-radius: 20px;
+    border: 5px solid white;
+}
+
+.images:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px lightgrey;
 }

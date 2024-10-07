@@ -6,8 +6,8 @@
 }
 
 <div class="card" >
-    <h1 class="card-title mb-4" height="600px">@ViewData["Title"]</h1>
-    <img src="~/images/@Model.Image" class="card-img-top images" alt="...">
+    <h3 class="card-title mb-4" height="600px">@ViewData["Title"]</h3>
+    <img src="~/images/@Model.Image" class="card-img-top images" alt="@Model.Image.Split("_", 2)[1]>
     <div class="card-body">
 
         <div class="mb-4 row">
@@ -36,6 +36,13 @@
             <label for="Stock" class="col-sm-4 col-form-label">Stock</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="Stock" name="Stock" value="@Model.Stock" readonly />
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <label for="Image" class="col-sm-4 col-form-label">Image</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Image" name="Image" value="@Model.Image.Split("_", 2)[1]" readonly />
             </div>
         </div>
 
