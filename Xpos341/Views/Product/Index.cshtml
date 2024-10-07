@@ -47,6 +47,7 @@
         <table class="table table-hover mb-3">
             <thead>
                 <tr>
+                    <th>Image</th>
                     <th>
                         <a asp-action="Index"
                            asp-route-sortOrder="@ViewBag.NameSort"
@@ -84,6 +85,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td> <img src="~/images/@item.Image" class="rounded-circle" height="40" width="40"/> </td>
                         <td>@item.NameProduct</td>
                         <td>@item.NameCategory / @item.NameVariant</td>
                         <td>@item.Price</td>
@@ -185,5 +187,4 @@
     $("#PageSize").change(function() {
         $("#form_PageSize").submit()
     })
-
 </script>

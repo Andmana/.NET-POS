@@ -140,15 +140,21 @@ namespace Xpos341.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(TblProduct dataParam)
+        public async Task<IActionResult> Edit(VMTblProduct dataParam)
         {
-            dataParam.UpdateBy = idUser;
+            dataParam.CreateDate = DateTime.Now;
+            dataParam.CreateBy = idUser;
+
+            if (dataParam.ImageFile != null)
+                dataParam.Image = Upload(dataParam.ImageFile);
+
             VMResponse response = await productService.Edit(dataParam);
 
             if (response.Success)
             {
                 return Json(new { dataResponse = response });
             }
+
             return PartialView(dataParam);
         }
         public async Task<IActionResult> Detail(int id)

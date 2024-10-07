@@ -8,7 +8,7 @@
 <div class="card">
     <div class="card-body">
 
-        <form asp-action="Edit" method="post" id="form_Edit">
+        <form asp-action="Edit" method="post" id="form_Edit" enctype="multipart/form-data">
 
             <input type="hidden" name="Id" id="Id" value="@Model.Id" />
 
@@ -64,9 +64,9 @@
             </div>
 
             <div class="mb-4 row">
-                <label for="Image" class="col-sm-4 col-form-label">Image</label>
+                <label for="ImageFile" class="col-sm-4 col-form-label">Image</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Image" name="Image" value="/Image/" />
+                    <input type="file" class="form-control" id="ImageFile" name="ImageFile" value="@Model.Image"/>
                 </div>
             </div>
 
@@ -95,22 +95,22 @@
             Price: {
                 required: true,
                 number: true,
-                min: 0.01 
+                min: 0.01  // Minimum value greater than 0
             },
             Stock: {
                 required: true,
-                digits: true,
-                min: 1 
+                digits: true,  // Ensures only whole numbers
+                min: 1  // Minimum value greater than 0
             }
         },
         messages: {
             NameProduct: {
                 required: "Please fill Product name",
                 minLength: "Minimal character is 3"
-            }, 
+            },
             IdVariant: {
                 required: "Please select variant"
-            }, 
+            },
             IdCategory: {
                 required: "Please select category"
             },
@@ -124,11 +124,9 @@
                 digits: "Stock must be a whole number",
                 min: "Stock must be at least 1"
             }
-
         },
         submitHandler: function (form) {
 
-            var dataForm = $(form).serialize()
 
             var id = $("#Id").val()
             var nameProduct = $("#NameProduct").val()
@@ -147,23 +145,37 @@
                 dataType: "json",
                 success: function (response) {
                     if (response && nameProduct.length >= 3) {
-                        $("#validate_NameProduct").empty().text(`Name Product is already exists in variant "${nameVariant}"`)
+                        $("#validate_NameProduct").empty().text(`Product name is already exists in ${nameVariant} variant`)
                         return true
                     }
                     else {
-                        fungsiSubmit(dataForm)
+                        fungsiSubmit(form)
                     }
 
                 }
             })
         }
     })
-    function fungsiSubmit(dataParam) {
+
+    function fungsiSubmit(form) {
+        var dataForm = $(form).serializeArray()
+        var formData = new FormData()
+
+        $.each(dataForm, function (key, input) {
+            formData.append(input.name, input.value)
+        })
+        var file = $("#ImageFile").prop("files");
+
+        if (file.length > 0)
+            formData.append("ImageFile", file[0])
+
         $.ajax({
             url: "Product/Edit",
             type: "post",
-            data: dataParam,
+            data: formData,
             dataType: "json",
+            contentType: false,
+            processData: false,
             success: function (response) {
                 var data = response.dataResponse
                 if (data.success) {
@@ -190,4 +202,23 @@
 
         })
     }
+
+    $("#IdCategory").change(function (){
+        var idCategory = $(this).val()
+        $.ajax({
+            url: "/Product/GetDataByIdCategory",
+            data: {id : idCategory},
+            type: "get",
+            datatype: "json",
+            success: function(response){
+                $("#IdVariant").empty()
+                $("#IdVariant").append("<option value=''>--Choose Variant--</option>")
+                $.each(response, function(index, res){
+                      $("#IdVariant").append(`<option value="${res.id}">${res.nameVariant}</option>`)
+                })
+
+            }
+        })
+    })
+
 </script>

@@ -66,7 +66,7 @@ namespace Xpos341.Services
             return data;
         }
 
-        public async Task<VMResponse> Edit(TblProduct dataParam)
+        public async Task<VMResponse> Edit(VMTblProduct dataParam)
         {
             //Proses convert dari objext ke string
             string json = JsonConvert.SerializeObject(dataParam);

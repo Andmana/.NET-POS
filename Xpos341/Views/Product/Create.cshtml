@@ -80,6 +80,21 @@
 </div>
 
 <script>
+    jQuery.validator.addMethod("typeFile", function (value, element, param) {
+        return value.match(new RegExp("." + param + "$"));
+    });
+
+    jQuery.validator.addMethod("sizeFile", function (val, element) {
+        var size = element.files[0].size;
+        if (size > 1048576)// checks the file more than 1 MB
+        {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+
     $("#form_input").validate({
         errorClass: "text-danger",
         rules: {
@@ -166,7 +181,7 @@
         }
     })
     function fungsiSubmit(form) {
-        dataForm = $(form).serialize()
+        var dataForm = $(form).serializeArray()
         var formData = new FormData()
 
         $.each(dataForm, function (key, input) {
@@ -228,20 +243,4 @@
             }
         })
     })
-
-    jQuery.validator.addMethod("typeFile", function (value, element, param) {
-        return value.match(new RegExp("." + param + "$"));
-    });
-
-    jQuery.validator.addMethod("sizeFile", function (val, element) {
-        var size = element.files[0].size;
-        if (size > 1048576)// checks the file more than 1 MB
-        {
-            return false;
-        } else {
-            return true;
-        }
-    });
-
-
 </script>
