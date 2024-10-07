@@ -12,15 +12,14 @@ public partial class TblOrderDetail
     [Key]
     public int Id { get; set; }
 
-    [StringLength(20)]
-    public string IdHeader { get; set; } = null!;
+    public int IdHeader { get; set; }
 
     public int IdProduct { get; set; }
 
-    [Column(TypeName = "decimal(18, 2)")]
-    public decimal Qty { get; set; }
+    public int Qty { get; set; }
 
-    public int SumPrice { get; set; }
+    [Column(TypeName = "decimal(18, 2)")]
+    public decimal SumPrice { get; set; }
 
     public bool? IsDelete { get; set; }
 

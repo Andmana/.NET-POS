@@ -35,32 +35,32 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07D5C5B44B");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC079FB3526D");
         });
 
         modelBuilder.Entity<TblCustomer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCusto__3214EC0707D48C52");
+            entity.HasKey(e => e.Id).HasName("PK__TblCusto__3214EC0706D1A9BF");
         });
 
         modelBuilder.Entity<TblOrderDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC078CB9D1FF");
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07B331D378");
         });
 
         modelBuilder.Entity<TblOrderHeader>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC0781EC03DE");
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07AA4244DD");
         });
 
         modelBuilder.Entity<TblProduct>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC07AFD7888E");
+            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC0704E7BC6E");
         });
 
         modelBuilder.Entity<TblVariant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07A179DEAE");
+            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07E744D1A7");
         });
 
         OnModelCreatingPartial(modelBuilder);

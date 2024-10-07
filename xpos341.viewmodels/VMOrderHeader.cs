@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace xpos341.viewmodels
 {
-    internal class VMOrderHeader
+    public class VMOrderHeader
     {
         public int Id { get; set; }
 
@@ -29,5 +29,7 @@ namespace xpos341.viewmodels
         public int? UpdateBy { get; set; }
 
         public DateTime? UpdateDate { get; set; }
+
+        public List<VMOrderDetail> ListDetails { get; set; }
     }
 }

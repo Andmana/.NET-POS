@@ -10,13 +10,18 @@ namespace xpos341.viewmodels
     {
         public int Id { get; set; }
 
-        public string IdHeader { get; set; } = null!;
+        public int IdHeader { get; set; }
 
         public int IdProduct { get; set; }
 
-        public decimal Qty { get; set; }
+        public string NameProduct { get; set; }
 
-        public int SumPrice { get; set; }
+        public int Qty { get; set; }
+
+        public int Stock { get; set; }
+
+        public decimal Price { get; set; }
+        public decimal SumPrice { get; set; }
 
         public bool? IsDelete { get; set; }
 
