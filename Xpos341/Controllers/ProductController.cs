@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using System.Net;
 using xpos341.datamodels;
 using xpos341.viewmodels;
 using Xpos341.Services;
@@ -11,16 +12,19 @@ namespace Xpos341.Controllers
         private CategoryService categoryService;
         private VariantService variantService;
         private ProductService productService;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         private int idUser = 1;
 
         public ProductController(CategoryService _categoryService, 
                                  VariantService _variantService,
-                                 ProductService _productService)
+                                 ProductService _productService,
+                                 IWebHostEnvironment _webHostEnvironment)
         {
             categoryService = _categoryService;
             variantService = _variantService;
             productService = _productService;
+            webHostEnvironment = _webHostEnvironment;
         }
 
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter,
@@ -83,16 +87,35 @@ namespace Xpos341.Controllers
             List<TblCategory> category = await categoryService.GetAllData();
             ViewBag.DropDownCategory = category;
 
-            TblProduct data = new TblProduct();
+            VMTblProduct data = new VMTblProduct();
 
             return PartialView(data);
         }
 
+        public string Upload(IFormFile imageFile)
+        {
+            string uniqueFileName = "";
+            if (imageFile != null)
+            {
+                string uploadFOlder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                string filePath = Path.Combine(uploadFOlder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                     imageFile.CopyTo(fileStream);
+                };
+            }
+            return uniqueFileName;
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Create(TblProduct dataParam)
+        public async Task<IActionResult> Create(VMTblProduct dataParam)
         {
             dataParam.CreateDate = DateTime.Now;
             dataParam.CreateBy = idUser;
+
+            if (dataParam.ImageFile != null)
+                dataParam.Image = Upload(dataParam.ImageFile);
 
             VMResponse response = await productService.Create(dataParam);
 
@@ -148,6 +171,12 @@ namespace Xpos341.Controllers
                 return Json(new { dataResponse = response });
             }
             return RedirectToAction("Index");
+        }
+
+        public async Task<JsonResult> GetDataByIdCategory(int id)
+        {
+            List<VMTblVariant> data = await variantService.GetDataByIdCategory(id);
+            return Json(data);
         }
     }
 }

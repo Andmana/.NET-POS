@@ -25,4 +25,8 @@
     <ProjectReference Include="..\xpos341.viewmodels\xpos341.viewmodels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

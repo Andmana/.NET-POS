@@ -41,6 +41,15 @@ namespace Xpos341.Services
             return data;
         }
 
+        public async Task<List<VMTblVariant>> GetDataByIdCategory(int idCategory)
+        {
+            string apiResponse = await client.GetStringAsync(RouteAPI + $"apiVariant/GetDataByIdCategory/{idCategory}");
+            // json convert
+            List<VMTblVariant> data = JsonConvert.DeserializeObject<List<VMTblVariant>>(apiResponse);
+
+            return data;
+        }
+
         public async Task<bool> CheckVariantByName(string nameVariant, int id, int idCategory)
         {
             string apiResponse = await client.GetStringAsync(RouteAPI + $"apiVariant/CheckByName/{nameVariant}/{id}/{idCategory}");

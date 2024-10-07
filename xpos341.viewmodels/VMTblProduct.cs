@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace xpos341.viewmodels
 {
@@ -40,5 +41,7 @@ namespace xpos341.viewmodels
         public int? UpdateBy { get; set; }
 
         public DateTime? UpdateDate { get; set; }
+
+        public IFormFile? ImageFile { get; set; }
     }
 }

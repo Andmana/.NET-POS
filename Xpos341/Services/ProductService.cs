@@ -32,7 +32,7 @@ namespace Xpos341.Services
             bool data = JsonConvert.DeserializeObject<bool>(apiResponse);
             return data;
         }
-        public async Task<VMResponse> Create(TblProduct dataParam)
+        public async Task<VMResponse> Create(VMTblProduct dataParam)
         {
             //Proses convert dari objext ke string
             string json = JsonConvert.SerializeObject(dataParam);
