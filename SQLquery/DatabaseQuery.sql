@@ -76,3 +76,36 @@ insert into TblProduct values
 (7, 'Ice Cream', 25000, 100, 'ice_cream_gelato.jpg', 0, 1, GETDATE(), null, null);
 
 select * from TblProduct;
+
+drop table if exists TblOrderHeader
+create table TblOrderHeader
+(
+	Id				int primary key identity(1,1),
+	CodeTransaction nvarchar(20) not null,
+	IdCostumer		int not null,
+	Amount			decimal (18,2) not null,
+	TotalQty		int not null,
+	IsCheckout		bit not null,
+
+	IsDelete		bit,
+	CreateBy		int not null,
+	CreateDate		datetime not null,
+	UpdateBy		int,
+	UpdateDate		datetime
+)
+
+drop table if exists TblOrderDetail
+create table TblOrderDetail
+(
+	Id				int primary key identity(1,1),
+	IdHeader		nvarchar(20) not null,
+	IdProduct		int not null,
+	Qty				decimal (18,2) not null,
+	SumPrice		int not null,
+
+	IsDelete		bit,
+	CreateBy		int not null,
+	CreateDate		datetime not null,
+	UpdateBy		int,
+	UpdateDate		datetime
+)

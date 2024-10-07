@@ -17,6 +17,10 @@ public partial class Xpos341Context : DbContext
 
     public virtual DbSet<TblCategory> TblCategories { get; set; }
 
+    public virtual DbSet<TblOrderDetail> TblOrderDetails { get; set; }
+
+    public virtual DbSet<TblOrderHeader> TblOrderHeaders { get; set; }
+
     public virtual DbSet<TblProduct> TblProducts { get; set; }
 
     public virtual DbSet<TblVariant> TblVariants { get; set; }
@@ -29,17 +33,27 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC0783538A73");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC071B53372E");
+        });
+
+        modelBuilder.Entity<TblOrderDetail>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07D4A9F485");
+        });
+
+        modelBuilder.Entity<TblOrderHeader>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07D53E377F");
         });
 
         modelBuilder.Entity<TblProduct>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC07FA540494");
+            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC0711595A5B");
         });
 
         modelBuilder.Entity<TblVariant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07A336478F");
+            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC076D82D9EE");
         });
 
         OnModelCreatingPartial(modelBuilder);
