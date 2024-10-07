@@ -5,14 +5,14 @@
     ViewData["Title"] = "Detail Product";
 }
 
-<div class="card">
+<div class="card" >
+    <h1 class="card-title mb-4" height="600px">@ViewData["Title"]</h1>
+    <img src="~/images/@Model.Image" class="card-img-top images" alt="...">
     <div class="card-body">
-        <h1 class="card-title mb-4">@ViewData["Title"]</h1>
 
         <div class="mb-4 row">
             <label for="NameProduct" class="col-sm-4 col-form-label">Name Product</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="NameProduct" name="NameProduct" value="@Model.NameProduct" readonly/>
                 <span id="validate_NameProduct" class="text-danger"></span>
             </div>
         </div>
@@ -36,13 +36,6 @@
             <label for="Stock" class="col-sm-4 col-form-label">Stock</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="Stock" name="Stock" value="@Model.Stock" readonly />
-            </div>
-        </div>
-
-        <div class="mb-4 row">
-            <label for="Image" class="col-sm-4 col-form-label">Image</label>
-            <div class="col-sm-8">
-                <input type="text" class="form-control" id="Image" name="Image" value="/Image/" readonly />
             </div>
         </div>
 
