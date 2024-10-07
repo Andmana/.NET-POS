@@ -42,7 +42,7 @@ insert into TblVariant values
 (1, 'Melon Juice', 'Desc of Jus Melon', 0, 1, GETDATE(), null, null),
 (1, 'Sprite', 'Desc of Sprite', 0, 1, GETDATE(), null, null),
 (1, 'Ice Tea', 'Desc of Ice Tea', 0, 1, GETDATE(), null, null),
-(2, 'Fried Chicken', 'Desc of Fried Chicken', 0, 2, GETDATE(), null, null),
+(2, 'Brerad', 'Desc of Bread', 0, 2, GETDATE(), null, null),
 (2, 'Hamburger', 'Desc of Hamburger', 0, 2, GETDATE(), null, null),
 (2, 'Pizza', 'Desc of Pizza', 0, 2, GETDATE(), null, null),
 (3, 'Ice Cream', 'Desc of Ice Cream', 0, 1, GETDATE(), null, null),
@@ -72,7 +72,7 @@ create table TblProduct
 )
 
 insert into TblProduct values
-(6, 'Chess Pizza', 100000, 100, '', 0, 1, GETDATE(), null, null),
-(6, 'Paperoni Pizza', 100000, 100, '', 0, 1, GETDATE(), null, null);
+(6, 'Bread Garlic', 15000, 100, 'bread_garlic.jpeg', 0, 1, GETDATE(), null, null),
+(7, 'Ice Cream', 25000, 100, 'ice_cream_gelato.jpg', 0, 1, GETDATE(), null, null);
 
 select * from TblProduct;
