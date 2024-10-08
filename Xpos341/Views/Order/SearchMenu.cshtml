@@ -1,0 +1,35 @@
+﻿<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Search Transaction</h3>
+    </div>
+
+    <form asp-action="Catalog">
+        <div class="card-body">
+            <div class="form-gourp">
+                <label for="NameProduct">Name Product</label>
+                <input type="text" class="form-control" id="NameProduct" name="NameProduct" placeholder="Name Product..." value="" />
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="MinAmount">Minimal Amount</label>
+                            <input type="number" class="form-control" id="MinAmount" name="MinAmount" placeholder="Min Amount..." value="" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="MaxAmount">Maximal Amount</label>
+                            <input type="number" class="form-control" id="MaxAmount" name="MaxAmount" placeholder="Max Amount..." value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary float-right">Search</button>
+        </div>
+    </form>
+</div
+

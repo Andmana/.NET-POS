@@ -10,6 +10,17 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<VariantService>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<OrderService>();
+
+//Add Session
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSession(option =>
+{
+    option.IdleTimeout = TimeSpan.FromHours(1);
+    option.Cookie.HttpOnly = true;
+    option.Cookie.IsEssential = true;
+});
 
 // Add Coneection String
 builder.Services.AddDbContext<Xpos341Context>(option =>
@@ -32,6 +43,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//Add Session
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
