@@ -10,7 +10,7 @@ namespace xpos341.viewmodels
     {
         public int Id { get; set; }
 
-        public string CodeTransaction { get; set; } = null!;
+        public string? CodeTransaction { get; set; } = null!;
 
         public int IdCostumer { get; set; }
 

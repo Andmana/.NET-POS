@@ -62,7 +62,8 @@ namespace Xpos341.api.Controllers
             head.Amount = dataHeader.Amount;
             head.TotalQty = dataHeader.TotalQty;
             head.IdCostumer = idUser;
-            head.IsCheckout = false;
+            head.IsDelete = false;
+            head.IsCheckout = true;
             head.CreateBy = idUser;
             head.CreateDate = DateTime.Now;
 
