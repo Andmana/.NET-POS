@@ -26,8 +26,7 @@ public partial class TblCustomer
     [StringLength(15)]
     public string Phone { get; set; } = null!;
 
-    [StringLength(50)]
-    public string IdRole { get; set; } = null!;
+    public int IdRole { get; set; }
 
     public bool? IsDelete { get; set; }
 

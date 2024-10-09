@@ -20,7 +20,9 @@ namespace xpos341.viewmodels
 
         public string Phone { get; set; } = null!;
 
-        public string IdRole { get; set; } = null!;
+        public int IdRole { get; set; }
+
+        public string? RoleName { get; set; }
 
         public bool? IsDelete { get; set; }
 
