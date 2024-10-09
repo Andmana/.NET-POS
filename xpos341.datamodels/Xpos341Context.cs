@@ -25,6 +25,8 @@ public partial class Xpos341Context : DbContext
 
     public virtual DbSet<TblProduct> TblProducts { get; set; }
 
+    public virtual DbSet<TblRole> TblRoles { get; set; }
+
     public virtual DbSet<TblVariant> TblVariants { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,32 +37,37 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC079FB3526D");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07EA17B92C");
         });
 
         modelBuilder.Entity<TblCustomer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCusto__3214EC0706D1A9BF");
+            entity.HasKey(e => e.Id).HasName("PK__TblCusto__3214EC07CF5AEE28");
         });
 
         modelBuilder.Entity<TblOrderDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07B331D378");
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07D5673BC4");
         });
 
         modelBuilder.Entity<TblOrderHeader>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07AA4244DD");
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC0779C24F71");
         });
 
         modelBuilder.Entity<TblProduct>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC0704E7BC6E");
+            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC072CFE5E78");
+        });
+
+        modelBuilder.Entity<TblRole>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TblRole__3214EC075F5E0DF0");
         });
 
         modelBuilder.Entity<TblVariant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07E744D1A7");
+            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC07320C4287");
         });
 
         OnModelCreatingPartial(modelBuilder);

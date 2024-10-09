@@ -53,13 +53,23 @@
 </div>
 
 <script>
-    $('#MinDate').change(function () {
+    $('#MinDate').on('input', function () {
         var min = $(this).val()
-        $("#MaxDate").attr({"Min" : min})
+        $("#MaxDate").attr({"min" : min})
     })
 
-    $('#MaxDate').change(function () {
+    $('#MaxDate').on('input', function () {
         var max = $(this).val()
-        $("#MinDate").attr({ "Max": max })
+        $("#MinDate").attr({ "max": max })
+    })
+
+    $('#MinAmount').change(function () {
+        var minAmount = $(this).val()
+        $("#MaxAmount").attr("min", minAmount)
+    })
+
+    $('#MaxAmount').change(function () {
+        var maxAmount = $(this).val()
+        $("#MinAmount").attr("max", maxAmount)
     })
 </script>

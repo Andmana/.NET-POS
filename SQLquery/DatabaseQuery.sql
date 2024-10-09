@@ -39,9 +39,9 @@ create table TblVariant
 )
 
 insert into TblVariant values
-(1, 'Melon Juice', 'Desc of Jus Melon', 0, 1, GETDATE(), null, null),
+(1, 'Juice', 'Desc', 0, 1, GETDATE(), null, null),
 (1, 'Sprite', 'Desc of Sprite', 0, 1, GETDATE(), null, null),
-(1, 'Ice Tea', 'Desc of Ice Tea', 0, 1, GETDATE(), null, null),
+(1, 'Tea', 'Desc of Ice Tea', 0, 1, GETDATE(), null, null),
 (2, 'Brerad', 'Desc of Bread', 0, 2, GETDATE(), null, null),
 (2, 'Hamburger', 'Desc of Hamburger', 0, 2, GETDATE(), null, null),
 (2, 'Pizza', 'Desc of Pizza', 0, 2, GETDATE(), null, null),
@@ -127,3 +127,45 @@ create table TblCustomer
 	UpdateBy		int,
 	UpdateDate		datetime
 )
+
+drop table if exists TblRole
+create table TblRole
+(
+	Id				int primary key identity(1,1),
+	RoleName		nvarchar(80) not null,
+	
+	IsDelete		bit,
+	CreatedBy		int not null,
+	CreatedDate		datetime not null,
+	UpdatedBy		int,
+	UpdatedDate		datetime
+
+)
+
+insert into TblRole VALUES
+('Administrator', 0, 1, GETDATE(), null, null);
+
+SELECT * FROM TblRole
+
+drop table if exists TblCustomer
+create table TblCustomer
+(
+	Id				int primary key identity(1,1),
+	NameCustomer	nvarchar(50) not null,
+	Email			nvarchar(50) not null,
+	Password		nvarchar(50) not null,
+	Address			nvarchar(max) not null,
+	Phone			nvarchar(15) not null,
+	IdRole			int not null,
+
+	IsDelete		bit,
+	CreateBy		int not null,
+	CreateDate		datetime not null,
+	UpdateBy		int,
+	UpdateDate		datetime
+)
+
+insert into TblCustomer values
+('Admin', 'admin@mail.com', 'admin', 'Jakarta', '081-xxx-xxx' , 1, 0, 1, GETDATE(), null, null)
+
+SELECT * FROM TblCustomer
