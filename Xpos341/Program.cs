@@ -11,6 +11,7 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<VariantService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<AuthService>();
 
 //Add Session
 builder.Services.AddDistributedMemoryCache();

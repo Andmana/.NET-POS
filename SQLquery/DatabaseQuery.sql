@@ -74,6 +74,9 @@ create table TblProduct
 insert into TblProduct values
 (6, 'Bread Garlic', 15000, 100, 'bread_garlic.jpeg', 0, 1, GETDATE(), null, null),
 (7, 'Ice Cream', 25000, 100, 'ice_cream_gelato.jpg', 0, 1, GETDATE(), null, null);
+(6,	'Chessy Pizza',	115000,	30,	'Pizza.jpg',	0,	1,	GETDATE(),	NULL,	NULL),
+(5,	'Hamburger Beef',	35000,	50,	'Hamburger.jpg',	0,	1,	GETDATE(),	NULL,	NULL),
+(7,	'Ice Cream Choco',	25000,	50,	'Ice_choco.jpg',	0,	1,	GETDATE(),	NULL,	NULL,)
 
 select * from TblProduct;
 
