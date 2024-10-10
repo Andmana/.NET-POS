@@ -48,5 +48,12 @@ namespace Xpos341.Controllers
 
             return Json(new {dataResponse = response});
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
