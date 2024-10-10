@@ -22,7 +22,6 @@ namespace Xpos341.api.Controllers
         [HttpGet("CheckLogin/{email}/{password}")]
         public VMTblCustomer CheckLogin(string email, string password)
         {
-            Console.WriteLine($"{email} {password}");
             VMTblCustomer data = (from c in db.TblCustomers
                                   join r in db.TblRoles on c.IdRole equals r.Id
                                   where c.IsDelete == false && c.Email == email && c.Password == password

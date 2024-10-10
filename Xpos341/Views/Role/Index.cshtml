@@ -1,0 +1,44 @@
+﻿@using xpos341.viewmodels
+@model List<VMTblRole>
+@{
+    ViewData["Title"] = "Roles setting";
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Roles List (@ViewBag.Count)</h3>
+        <div class="card-tools">
+            <button class="btn btn-primary" id="btn_search">
+                <i class="fas fa-search"></i>
+                Search
+            </button>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Role Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.RoleName</td>
+                        <td>
+                            <a class="btn btn-primary btn_detail" dataId="@item.Id">Detail</a>
+                            <a class="btn btn-light btn_edit" dataId="@item.Id">Edit</a>
+                            <a class="btn btn-warning btn_delete" dataId="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
