@@ -1,0 +1,66 @@
+﻿@using xpos341.viewmodels
+@model VMTblRole
+
+@{
+    ViewData["Title"] = "Delete Role";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="h4 mb-4">@ViewData["Title"]</div>
+
+        <div class="mb-4">Are you sure delete this role, <strong>@Model.RoleName</strong> </div>
+
+        <form asp-action="SureDelete" id="form_delete" method="post">
+            <input type="hidden" name="Id" Id="Id" value="@Model.Id" />
+
+            <div class="modal-footer">
+
+                <button type="submit" class="btn btn-danger">Yes</button>
+                <a class="btn btn-light" asp-controller="Product" asp-action="Index">NO</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<script>
+    $("#form_delete").validate({
+        submitHandler: function (form) {
+            var id = $("#Id").val()
+
+            $.ajax({
+                url: "Role/SureDelete",
+                type: "post",
+                data: { id: id },
+                dataType: "json",
+                success: function (res) {
+                    var data = res.dataResponse
+
+                    if (data.success) {
+                        $("#my_modal").modal("hide")
+
+                        toastr.success(
+                            data.message,
+                            '',
+                            {
+                                timeOut: 500,
+                                fadeOut: 500,
+                                onHidden: function () {
+                                    window.location.reload()
+                                }
+                            }
+                        )
+                    }
+                    else {
+                        toastr.errorClass(data.message)
+                    }
+                }
+                , error: function (res) {
+                    console.log(res)
+                }
+            })
+        }
+    })
+</script>

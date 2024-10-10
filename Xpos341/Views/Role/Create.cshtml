@@ -1,0 +1,106 @@
+﻿@using xpos341.viewmodels;
+@model VMTblRole;
+@{
+    Layout = null;
+    ViewData["Title"] = "Add Role";
+}
+
+<div class="card">
+    <div class="card-body">
+
+        <form asp-action="Create" method="post" id="form_input">
+
+            <div class="mb-4 row">
+                <label for="RoleName" class="col-sm-4 col-form-label">Name Role</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="RoleName" name="RoleName" value="" />
+                    <span id="validate_RoleName" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="mb-4 row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-light fw-bold" asp-controller="Role" asp-action="Index"> Back to list</a>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    $("#form_input").validate({
+        errorClass: "text-danger",
+        rules: {
+            RoleName: {
+                required: true,
+                minlength: 3,
+            }
+        },
+        messages: {
+            RoleName: {
+                required: "Please fill Role name",
+                minLength: "Minimal character is 3"
+            }
+        },
+        submitHandler: function (form) {
+
+            var id = 0
+            var RoleName = $("#RoleName").val()
+
+            $.ajax({
+                url: "/Role/CheckNameExist",
+                type: "get",
+                data: {
+                    name: RoleName,
+                    id: id,
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response && RoleName.length >= 3) {
+                        $("#validate_RoleName").empty().text(`Role name is already exists`)
+                        return true
+                    }
+                    else {
+                        fungsiSubmit(form)
+                    }
+
+                }
+            })
+        }
+    })
+    function fungsiSubmit(form) {
+        var dataForm = $(form).serialize()
+        $.ajax({
+            url: "Role/Create",
+            type: "post",
+            data: dataForm,
+            dataType: "json",
+            success: function (response) {
+                var data = response.dataResponse
+                if (data.success) {
+                    $("#my_modal").modal("hide")
+                    Swal.fire({
+                        icon: "success",
+                        title: "Role Added",
+                        text: data.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(function () {
+                            window.location.reload()
+                    })
+                }
+                else {
+                    toastr.errorClass(data.message)
+                }
+
+            }, error: function (response) {
+                console.log(response)
+            }
+
+        })
+    }
+</script>
