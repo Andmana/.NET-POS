@@ -19,6 +19,10 @@ public partial class Xpos341Context : DbContext
 
     public virtual DbSet<TblCustomer> TblCustomers { get; set; }
 
+    public virtual DbSet<TblMenu> TblMenus { get; set; }
+
+    public virtual DbSet<TblMenuAccess> TblMenuAccesses { get; set; }
+
     public virtual DbSet<TblOrderDetail> TblOrderDetails { get; set; }
 
     public virtual DbSet<TblOrderHeader> TblOrderHeaders { get; set; }
@@ -37,37 +41,47 @@ public partial class Xpos341Context : DbContext
     {
         modelBuilder.Entity<TblCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC0740FE064D");
+            entity.HasKey(e => e.Id).HasName("PK__TblCateg__3214EC07A746B943");
         });
 
         modelBuilder.Entity<TblCustomer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblCusto__3214EC07C93AB9D4");
+            entity.HasKey(e => e.Id).HasName("PK__TblCusto__3214EC07062E524B");
+        });
+
+        modelBuilder.Entity<TblMenu>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TblMenu__3214EC07F08AB9E8");
+        });
+
+        modelBuilder.Entity<TblMenuAccess>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TblMenuA__3214EC07699927C4");
         });
 
         modelBuilder.Entity<TblOrderDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07B2A98C9E");
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC0798E761BA");
         });
 
         modelBuilder.Entity<TblOrderHeader>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC07D1B5D48D");
+            entity.HasKey(e => e.Id).HasName("PK__TblOrder__3214EC076F4B9D26");
         });
 
         modelBuilder.Entity<TblProduct>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC078BD0AF78");
+            entity.HasKey(e => e.Id).HasName("PK__TblProdu__3214EC070BC17904");
         });
 
         modelBuilder.Entity<TblRole>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblRole__3214EC075346393F");
+            entity.HasKey(e => e.Id).HasName("PK__TblRole__3214EC079422E4D6");
         });
 
         modelBuilder.Entity<TblVariant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC0767B4725B");
+            entity.HasKey(e => e.Id).HasName("PK__TblVaria__3214EC073FABD42B");
         });
 
         OnModelCreatingPartial(modelBuilder);

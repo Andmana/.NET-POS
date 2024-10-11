@@ -174,3 +174,31 @@ insert into TblCustomer values
 ('Buyer', 'buyer@mail.com', 'buyer', 'Jakarta', '082-xxx-xxx' , 1, 0, 1, GETDATE(), null, null)
 
 SELECT * FROM TblCustomer
+
+drop table if exists TblMenu
+create table TblMenu(
+	Id				int primary key identity(1,1) not null,
+	MenuName		varchar(80) not null,
+	MenuAction		varchar(80) not null,
+	MenuController	varchar(80) not null,
+	MenuIcon		varchar(80) null,
+	MenuSorting		int null,
+	IsParent		bit null,
+	MenuParent		int null,
+	IsDelete		bit null,
+	CreatedBy		int not null,
+	CreatedDate		datetime not null,
+	UpdatedBy		int null,
+	UpdatedDate		datetime null
+)
+drop table if exists TblMenuAccess
+create table TblMenuAccess(
+	Id				int primary key identity(1,1) not null,
+	RoleId			int null,
+	MenuId			int null,
+	IsDelete		bit null,
+	CreatedBy		int not null,
+	CreatedDate		datetime not null,
+	UpdatedBy		int null,
+	UpdatedDate		datetime null
+)
