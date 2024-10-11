@@ -121,6 +121,7 @@ namespace Xpos341.api.Controllers
                 dt.UpdateBy = idUser;
                 dt.UpdateDate = DateTime.Now;
 
+                dt.Email = data.Email ?? dt.Email;
                 dt.Password = data.Password ?? dt.Password;
                 dt.IdRole = data.IdRole ?? dt.IdRole;
 

@@ -103,5 +103,57 @@ namespace Xpos341.Controllers
 
             return PartialView(dataParam);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            List<VMTblRole> roles = await roleService.GetAllData();
+            ViewBag.DropDownRoles = roles;
+
+            VMTblCustomer data = await customerService.GetById(id);
+
+            return PartialView(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(VMTblCustomer dataParam)
+        {
+            dataParam.CreateBy = idUser;
+            dataParam.CreateDate = DateTime.Now;
+
+            VMResponse response = await customerService.Edit(dataParam);
+
+            if (response.Success)
+            {
+                return Json(new { dataResponse = response });
+            }
+
+            return PartialView(dataParam);
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            VMTblCustomer data = await customerService.GetById(id);
+
+            return PartialView(data);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            VMTblCustomer data = await customerService.GetById(id);
+            return PartialView(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SureDelete(int id)
+        {
+            int createBy = idUser;
+            VMResponse response = await customerService.Delete(id);
+
+            if (response.Success)
+            {
+                return Json(new { dataResponse = response });
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

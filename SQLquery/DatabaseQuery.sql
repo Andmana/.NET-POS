@@ -73,10 +73,10 @@ create table TblProduct
 
 insert into TblProduct values
 (6, 'Bread Garlic', 15000, 100, 'bread_garlic.jpeg', 0, 1, GETDATE(), null, null),
-(7, 'Ice Cream', 25000, 100, 'ice_cream_gelato.jpg', 0, 1, GETDATE(), null, null);
+(7, 'Ice Cream', 25000, 100, 'ice_cream_gelato.jpg', 0, 1, GETDATE(), null, null),
 (6,	'Chessy Pizza',	115000,	30,	'Pizza.jpg',	0,	1,	GETDATE(),	NULL,	NULL),
 (5,	'Hamburger Beef',	35000,	50,	'Hamburger.jpg',	0,	1,	GETDATE(),	NULL,	NULL),
-(7,	'Ice Cream Choco',	25000,	50,	'Ice_choco.jpg',	0,	1,	GETDATE(),	NULL,	NULL,)
+(7,	'Ice Cream Choco',	25000,	50,	'Ice_choco.jpg',	0,	1,	GETDATE(),	NULL,	NULL);
 
 select * from TblProduct;
 
@@ -146,7 +146,8 @@ create table TblRole
 )
 
 insert into TblRole VALUES
-('Administrator', 0, 1, GETDATE(), null, null);
+('Administrator', 0, 1, GETDATE(), null, null),
+('Customer', 0, 1, GETDATE(), null, null);
 
 SELECT * FROM TblRole
 
@@ -169,6 +170,7 @@ create table TblCustomer
 )
 
 insert into TblCustomer values
-('Admin', 'admin@mail.com', 'admin', 'Jakarta', '081-xxx-xxx' , 1, 0, 1, GETDATE(), null, null)
+('Admin', 'admin@mail.com', 'admin', 'Jakarta', '081-xxx-xxx' , 1, 0, 1, GETDATE(), null, null),
+('Buyer', 'buyer@mail.com', 'buyer', 'Jakarta', '082-xxx-xxx' , 1, 0, 1, GETDATE(), null, null)
 
 SELECT * FROM TblCustomer
