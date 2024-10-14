@@ -18,6 +18,7 @@ namespace Xpos341.api.Controllers
         public apiRoleController(Xpos341Context _db)
         {
             db = _db;
+            roleService = new RoleService(db);
         }
 
         [HttpGet("GetAllData")]
@@ -184,8 +185,8 @@ namespace Xpos341.api.Controllers
             result.role_menu = await roleService.GetMenuAccessParentChildByRoleId(result.Id, 0, false);
             return result;
         }
-
-        [HttpPut]
+        //INI CARA : UPDATE ISDELETE TRUE (ALL) & INSERT (ALL)
+        [HttpPut("Edit_MenuAccess")]
         public VMResponse Edit_MenuAccess(VMTblRole data)
         {
             TblRole dt = db.TblRoles.Where(a => a.Id == data.Id).FirstOrDefault();
@@ -204,10 +205,10 @@ namespace Xpos341.api.Controllers
                     if (data.role_menu.Count > 0)
                     {
                         // remove menu access
-                        List<TblMenuAccess> listMenuAccessRemove = db.TblMenuAccesses.Where(a => a.RoleId == data.Id).ToList();
-                        if (listMenuAccessRemove.Count > 0)
+                        List<TblMenuAccess> ListMenuAccessRemove = db.TblMenuAccesses.Where(a => a.RoleId == data.Id).ToList();
+                        if (ListMenuAccessRemove.Count > 0)
                         {
-                            foreach (TblMenuAccess item in listMenuAccessRemove)
+                            foreach (TblMenuAccess item in ListMenuAccessRemove)
                             {
                                 item.IsDelete = true;
                                 item.UpdatedBy = idUser;

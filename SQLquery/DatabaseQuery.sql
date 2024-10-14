@@ -202,3 +202,43 @@ create table TblMenuAccess(
 	UpdatedBy		int null,
 	UpdatedDate		datetime null
 )
+
+INSERT INTO TblMenu (MenuName, MenuAction, MenuController, MenuIcon, MenuSorting, IsParent, MenuParent, IsDelete, CreatedBy, CreatedDate, UpdatedBy, UpdatedDate) 
+VALUES 
+(N'Home', N'Index', N'Home', N'home', 1, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Friend', N'Index', N'Friend', N'tag', 2, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'CategoryTry', N'Index', N'CategoryTry', N'calendar', 3, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'VariantTry', N'Index', N'VariantTry', N'message-square', 4, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Category', N'Index', N'Category', N'tag', 5, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Variant', N'Index', N'Variant', N'calendar', 6, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Product', N'Index', N'Product', N'message-square', 7, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Menu Catalog', N'Catalog', N'Order', N'tag', 8, 0, 16, 0, 1, GETDATE(), NULL, NULL),
+(N'History Order', N'HistoryOrder', N'Order', N'message-square', 9, 0, 16, 0, 1, GETDATE(), NULL, NULL),
+(N'Product Kalbe', N'Index', N'ProductKalbe', N'tag', 13, 0, 16, 0, 1, GETDATE(), NULL, NULL),
+(N'Customer Kalbe', N'Index', N'CustomerKalbe', N'calendar', 14, 0, 16, 0, 1, GETDATE(), NULL, NULL),
+(N'Penjualan Kalbe', N'Index', N'PenjualanKalbe', N'message-square', 15, 0, 16, 0, 1, GETDATE(), NULL, NULL),
+(N'Role', N'Index', N'Role', N'tag', 10, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Customer', N'Index', N'Customer', N'calendar', 12, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Master', N'', N'', N'tag', 1, 1, 0, 0, 1, GETDATE(), NULL, NULL),
+(N'Transaction', N'', N'', N'calendar', 2, 1, 0, 0, 1, GETDATE(), NULL, NULL),
+(N'Atur Menu Access', N'Index_MenuAccess', N'Role', N'tag', 11, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Spesialisasi Dokter', N'Index', N'MSpecialization', N'calendar', 16, 0, 15, 0, 1, GETDATE(), NULL, NULL);
+
+INSERT INTO TblMenuAccess (RoleId, MenuId, IsDelete, CreatedBy, CreatedDate, UpdatedBy, UpdatedDate) VALUES 
+(1, 2, 0, 1, GETDATE(), NULL, NULL),
+(1, 3, 0, 1, GETDATE(), NULL, NULL),
+(1, 1, 0, 1, GETDATE(), NULL, NULL),
+(1, 4, 0, 1, GETDATE(), NULL, NULL),
+(1, 5, 0, 1, GETDATE(), NULL, NULL),
+(1, 6, 0, 1, GETDATE(), NULL, NULL),
+(1, 7, 0, 1, GETDATE(), NULL, NULL),
+(1, 8, 0, 1, GETDATE(), NULL, NULL),
+(1, 9, 0, 1, GETDATE(), NULL, NULL),
+(1, 10, 0, 1, GETDATE(), NULL, NULL),
+(1, 11, 0, 1, GETDATE(), NULL, NULL),
+(1, 12, 0, 1, GETDATE(), NULL, NULL),
+(1, 13, 0, 1, GETDATE(), NULL, NULL),
+(1, 14, 0, 1, GETDATE(), NULL, NULL),
+(1, 15, 0, 1, GETDATE(), NULL, NULL),
+(1, 16, 0, 1, GETDATE(), NULL, NULL),
+(1, 17, 0, 1, GETDATE(), NULL, NULL);

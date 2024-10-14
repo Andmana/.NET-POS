@@ -109,5 +109,13 @@ namespace Xpos341.Services
 
             return response;
         }
+
+        public async Task<VMTblRole> GetDataById_MenuAccess(int id)
+        {
+            string apiResponse = await client.GetStringAsync(RouteAPI + $"apiRole/GetDataById_MenuAccess/{id}");
+            VMTblRole data = JsonConvert.DeserializeObject<VMTblRole>(apiResponse)!;
+
+            return data;
+        }
     }
 }

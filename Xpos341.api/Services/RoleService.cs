@@ -22,20 +22,21 @@ namespace Xpos341.api.Services
             foreach (TblMenu item in data)
             {
                 VMMenuAccess list = new VMMenuAccess();
+
                 list.IdMenu = item.Id;
                 list.MenuName = item.MenuName;
                 list.IsParent = item.IsParent;
                 list.MenuParent = item.MenuParent;
                 list.is_selected = db.TblMenuAccesses.Where(a => a.RoleId == idRole && a.MenuId == item.Id && a.IsDelete == false).Any();
                 list.List_Child = await GetMenuAccessParentChildByRoleId(idRole, item.Id, isSelected);
+                
                 if (isSelected)
                 {
                     if (list.is_selected) 
                         result.Add(list);
-
-                    else
-                        result.Add(list);
                 }
+                else
+                    result.Add(list);
             }
             
             return result;

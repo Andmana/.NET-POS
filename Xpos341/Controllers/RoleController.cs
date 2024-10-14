@@ -132,5 +132,52 @@ namespace Xpos341.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        //UNTUK ATUR MENU ACCESS
+        public async Task<IActionResult> Index_MenuAccess(string sortOrder, string searchString,
+                                    string currentFilter, int? pageNumber, int? pageSize)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentPageSize = pageSize;
+            ViewBag.NameSort = string.IsNullOrEmpty(sortOrder) ? "role_name" : "";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            // Get data from API
+            List<VMTblRole> data = await roleService.GetAllData();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                data = data.Where(a => a.RoleName.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "role_name":
+                    data = data.OrderByDescending(a => a.RoleName).ToList();
+                    break;
+                default:
+                    data = data.OrderBy(a => a.RoleName).ToList();
+                    break;
+            }
+
+            return View(PaginatedList<VMTblRole>.CreateAsync(data, pageNumber ?? 1, pageSize ?? 3));
+        }
+
+        public async Task<IActionResult> Edit_MenuAccess(int id)
+        {
+            VMTblRole data = await roleService.GetDataById_MenuAccess(id);
+            ViewBag.role_menu = data.role_menu;
+            return PartialView(data);
+        }
     }
 }
