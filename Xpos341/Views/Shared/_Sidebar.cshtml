@@ -35,6 +35,16 @@
                                 </span>
                             </a>
                         </li>
+                        <!-- ============================================================== -->
+                        @* Order SideBar *@
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" asp-area="" asp-controller="Role" asp-action="Index_MenuAccess"
+                               aria-expanded="false">
+                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">
+                                    Atur Menu Access
+                                </span>
+                            </a>
+                        </li>
 
                         <!-- ============================================================== -->
                         @* Order SideBar *@
@@ -84,52 +94,40 @@
 
 
                         <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">Applications</span></li>
-
-                        <!-- ============================================================== -->
-                        @* Friends SideBar *@
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="Friends" asp-action="Index"
-                               aria-expanded="false">
-                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">
-                                    Friends
+                        <li class="sidebar-item selected">
+                            <a class="sidebar-link has-arrow active" href="javascript:void(0)" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather feather-icon"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg><span class="hide-menu">
+                                    Aplication
                                 </span>
                             </a>
-                        </li>
+                            <ul aria-expanded="false" class="collapse first-level base-level-line in">
 
-                        <!-- ============================================================== -->
-                        @* Category SideBar *@
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="CategoryTry" asp-action="Index"
-                               aria-expanded="false">
-                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">
-                                    Category Try
-                                </span>
-                            </a>
-                        </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" asp-area="" asp-controller="Friends" asp-action="Index">
+                                        <span class="hide-menu"> Friends </span>
+                                    </a>
+                                </li>
 
-                        <!-- ============================================================== -->
-                        @* Vaariant SideBar *@
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="VariantTry" asp-action="Index"
-                               aria-expanded="false">
-                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">
-                                    Variant Try
-                                </span>
-                            </a>
-                        </li>
+                                <li class="sidebar-item" >
+                                    <a class="sidebar-link" asp-area="" asp-controller="CategoryTry" asp-action="Index">
+                                        <span class="hide-menu"> Category Try </span>
+                                    </a>
+                                </li>
 
-                        <!-- ============================================================== -->
-                        @* Dummy SideBar *@
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="Dummy" asp-action="Bootcamp"
-                               aria-expanded="false">
-                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">
-                                    Dummy
-                                </span>
-                            </a>
-                        </li>
+                                <li class="sidebar-item" >
+                                    <a class="sidebar-link" asp-area="" asp-controller="VariantTry" asp-action="Index">
+                                        <span class="hide-menu"> Variant Try </span>
+                                    </a>
+                                </li>
 
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" asp-area="" asp-controller="Dummy" asp-action="Bootcamp">
+                                        <span class="hide-menu"> Dummy </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                       
                         <!-- ============================================================== -->
                         <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>
 

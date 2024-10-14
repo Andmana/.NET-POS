@@ -11,48 +11,44 @@
         <div class="mb-4 row">
             <label for="NameCustomer" class="col-sm-4 col-form-label">Name Customer</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="NameCustomer" name="NameCustomer" value="@Model.NameCustomer" />
+                <input type="text" class="form-control" id="NameCustomer" name="NameCustomer" value="@Model.NameCustomer" readonly />
             </div>
         </div>
 
         <div class="mb-4 row">
             <label for="Email" class="col-sm-4 col-form-label">Email</label>
             <div class="col-sm-8">
-                <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" />
-                <span id="validate_EmailCustomer" class="text-danger"></span>
-                <span id="validate_Email" class="text-danger"></span>
+                <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" readonly />
             </div>
         </div>
 
         <div class="mb-4 row">
             <label for="Password" class="col-sm-4 col-form-label">Password</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="Password" name="Password" value="" />
-                <span id="validate_Password" class="text-danger"></span>
+                <input type="password" class="form-control" id="Password" name="Password" value="" readonly />
+                <input type="checkbox" onclick="myFunction()">Show Password
+                <i class="bi bi-eye-slash" id="togglePassword"></i>
             </div>
         </div>
 
         <div class="mb-4 row">
             <label for="RoleName" class="col-sm-4 col-form-label">Role</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="RoleName" name="RoleName" value="@Model.RoleName" />
-                <span id="validate_RoleName" class="text-danger"></span>
+                <input type="text" class="form-control" id="RoleName" name="RoleName" value="@Model.RoleName" readonly />
             </div>
         </div>
 
         <div class="mb-4 row">
             <label for="Phone" class="col-sm-4 col-form-label">Phone</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="Phone" name="Phone" value="@Model.Phone" />
-                <span id="validate_Phone" class="text-danger"></span>
+                <input type="text" class="form-control" id="Phone" name="Phone" value="@Model.Phone" readonly />
             </div>
         </div>
 
         <div class="mb-4 row">
             <label for="Address" class="col-sm-4 col-form-label">Address</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="Address" name="Address" value="@Model.Address" />
-                <span id="validate_Address" class="text-danger"></span>
+                <input type="text" class="form-control" id="Address" name="Address" value="@Model.Address" readonly />
             </div>
         </div>
 
@@ -62,8 +58,16 @@
             </div>
         </div>
 
-
-
-
     </div>
 </div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("Password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
