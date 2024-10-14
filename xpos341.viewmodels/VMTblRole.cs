@@ -21,5 +21,7 @@ namespace xpos341.viewmodels
         public int? UpdatedBy { get; set; }
 
         public DateTime? UpdatedDate { get; set; }
+
+        public List<VMMenuAccess> role_menu {  get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using xpos341.datamodels;
 using xpos341.viewmodels;
+using Xpos341.api.Services;
 
 namespace Xpos341.api.Controllers
 {
@@ -11,6 +12,7 @@ namespace Xpos341.api.Controllers
     {
         private readonly Xpos341Context db;
         private VMResponse response = new VMResponse();
+        private RoleService roleService;
         private int idUser = 1;
 
         public apiRoleController(Xpos341Context _db)
@@ -162,6 +164,90 @@ namespace Xpos341.api.Controllers
             {
                 response.Success = false;
                 response.Message = "Data not found";
+            }
+
+            return response;
+        }
+
+        //Untuk atur menu access
+        [HttpGet("GetDataById_MenuAccess/{id}")]
+        public async Task<VMTblRole> DataById_MenuAccess(int id)
+        {
+            VMTblRole result = db.TblRoles.Where(a => a.Id == id)
+                                          .Select(a => new VMTblRole()
+                                          {
+                                              Id = a.Id,
+                                              RoleName = a.RoleName,
+                                          })
+                                          .FirstOrDefault()!;
+
+            result.role_menu = await roleService.GetMenuAccessParentChildByRoleId(result.Id, 0, false);
+            return result;
+        }
+
+        [HttpPut]
+        public VMResponse Edit_MenuAccess(VMTblRole data)
+        {
+            TblRole dt = db.TblRoles.Where(a => a.Id == data.Id).FirstOrDefault();
+
+            if (dt != null)
+            {
+                dt.RoleName = data.RoleName;
+                dt.UpdatedDate = DateTime.Now;
+                dt.UpdatedBy = idUser;
+
+                try
+                {
+                    db.Update(dt);
+
+                    //Save Menu access
+                    if (data.role_menu.Count > 0)
+                    {
+                        // remove menu access
+                        List<TblMenuAccess> listMenuAccessRemove = db.TblMenuAccesses.Where(a => a.RoleId == data.Id).ToList();
+                        if (listMenuAccessRemove.Count > 0)
+                        {
+                            foreach (TblMenuAccess item in listMenuAccessRemove)
+                            {
+                                item.IsDelete = true;
+                                item.UpdatedBy = idUser;
+                                item.UpdatedDate = DateTime.Now;
+
+                                db.Update(item);
+                            }
+                        }
+                        List<TblMenuAccess> listMenuAccessAdd = data.role_menu.Where(a => a.is_selected == true)
+                                                                                  .Select(a => new TblMenuAccess()
+                                                                                  {
+                                                                                      RoleId = data.Id,
+                                                                                      MenuId = a.IdMenu,
+                                                                                      IsDelete = false,
+                                                                                      CreatedBy = idUser,
+                                                                                      CreatedDate = DateTime.Now,
+
+                                                                                  }).ToList();
+
+                        foreach (TblMenuAccess item in listMenuAccessAdd)
+                        {
+                            db.Add(item);
+                        }
+
+                        db.SaveChanges();
+                        response.Message = "Data saved";
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Message = "Failed save : " + ex.Message;
+                }
+            }else
+            {
+                response.Success = false;
+                response.Message = "Data not found";
+
             }
 
             return response;
