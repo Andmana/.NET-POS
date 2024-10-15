@@ -1,0 +1,254 @@
+﻿@using xpos341.viewmodels
+
+@model VMTblCustomer
+
+<div class="card card-outline card-primary">
+
+    <div class="card-body">
+        <p class="login-box-msg">Register a new membership</p>
+        <form asp-action="Register" id="form_register" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="NameCustomer" id="NameCustomer" placeholder="Full name">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" id="Email" name="Email" oninput="CheckEmailIsExist()" placeholder="Email">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+
+                <span id="validate_email" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="Phone" name="Phone" placeholder="Phone">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-phone"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="Address" name="Address" placeholder="Address">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-home"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Retype password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                @*dropdown HTML*@
+                <label for="IdRole" class="form-label">Role</label>
+
+                @Html.DropDownList("IdRole",
+                         new SelectList(ViewBag.ListRole, "Id", "RoleName"),
+                         "--Pilih Role--",
+                         new { @class = "form-control" }
+                         )
+
+            </div>
+
+            <div class="row">
+                <div class="col-8">
+                    <div class="icheck-primary">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" value="agree">
+                        <label for="agreeTerms">
+                            I agree to the <a href="#">terms</a>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+
+            </div>
+        </form>
+        <div class="social-auth-links text-center">
+            <a id="btn_membership" class="btn btn-block btn-success">
+                <i class="fab fa-google-plus mr-2"></i>
+                I already have a membership
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $("#btn_membership").click(function(){
+        $("#modal_body").empty()
+        $("#modal_body").load("/Auth/Login")
+        $("#my_modal").modal("show")
+    })
+
+    $("#form_register").validate({
+        errorClass:"text-danger",
+        rules:{
+            NameCustomer : {
+                required : true,
+                minlength : 5,
+            },
+            Password : {
+                required : true,
+                strong_password : true
+            },
+            re_password :{
+                equalTo : "#Password",
+                required : true,
+            },
+            agreeTerms : "required",
+            Email : {
+                required : true,
+                email: true,
+            },
+            IdRole : "required"
+        },
+        messages:{
+            NameCustomer : {
+                required : "Please fill Name Customer",
+                minlength : "The name must consist of at least 5 characters",
+            },
+            Password : {
+                required : "Please fill password"
+            },
+            re_password :{
+                equalTo : "Please fill the same value again.",
+                required : "Please fill re-password",
+            },
+            agreeTerms : "Please check agree Term",
+            Email : {
+                required : "Please fill Email",
+                email: "Please enter a valid email address",
+            },
+            IdRole : "Please select role"
+        },
+        submitHandler: function(form){
+            var dataForm = $(form).serialize()
+
+            var email = $("#Email").val()
+            var id = 0
+
+            $.ajax({
+                url: "/Customer/CheckExists",
+                type:"get",
+                data: { email: email, id: id },
+                dataType: "json",
+                success: function(respon){
+                    if(respon){
+                        $("#validate_email").text("Email is already exists")
+                        return true
+                    }
+                    else{
+                        fungsiSubmit(dataForm)
+                    }
+                }
+            })
+
+        }
+    })
+
+    $.validator.addMethod("strong_password", function (value, element) {
+        let password = value;
+        if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@@#$%&])(.{8,20}$)/.test(password))) {
+            return false;
+        }
+        return true;
+    }, function (value, element) {
+        let password = $(element).val();
+        if (!(/^(.{8,20}$)/.test(password))) {
+            return 'Password must be between 8 to 20 characters long.';
+        }
+        else if (!(/^(?=.*[A-Z])/.test(password))) {
+            return 'Password must contain at least one uppercase.';
+        }
+        else if (!(/^(?=.*[a-z])/.test(password))) {
+            return 'Password must contain at least one lowercase.';
+        }
+        else if (!(/^(?=.*[0-9])/.test(password))) {
+            return 'Password must contain at least one digit.';
+        }
+        else if (!(/^(?=.*[@@#$%&])/.test(password))) {
+            return "Password must contain special characters from @@#$%&.";
+        }
+        return false;
+    });
+
+    function fungsiSubmit(dataParam){
+        $.ajax({
+            url: '/Customer/Create',
+            type: "post",
+            data: dataParam,
+            dataType: "json",
+            success: function(response){
+                var data = response.dataResponse
+
+                if(data.success){
+                    $("#my_modal").modal("hide")
+
+                   Swal.fire(
+                      'Information!',
+                      data.message,
+                      'success'
+                   ).then(function(){
+                        window.location.reload()
+                   })
+                }
+                else{
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Warning!',
+                        text: data.message
+                    })
+                }
+            }
+        })
+    }
+
+    function CheckEmailIsExist(){
+        var email = $("#Email").val()
+        var id = 0
+
+        $.ajax({
+            url: "/Customer/CheckExists",
+            type:"get",
+            data: { email: email, id: id },
+            dataType: "json",
+            success: function(respon){
+                if(respon){
+                    $("#validate_email").text("Email is already exists")
+                    return false
+                }
+                else{
+                    return true
+                }
+            }
+        })
+    }
+
+</script>

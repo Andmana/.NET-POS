@@ -46,6 +46,12 @@
 <!-- ============================================================== -->
 
 <script>
+    $('#btn_register').click(function() {
+        $('#modal_body').empty()
+        $('#modal_body').load('/Auth/Register')
+        $('#my_modal').modal('show')
+    })
+
     $("#form_login").validate({
         errorClass: "is-invalid text-danger",
         rules: {
