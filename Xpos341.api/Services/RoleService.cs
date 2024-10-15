@@ -13,7 +13,7 @@ namespace Xpos341.api.Services
             db = _db;
         }
 
-        public async Task<List<VMMenuAccess>> GetMenuAccessParentChildByRoleId(int idRole, int MenuParent, bool isSelected = false)
+        public async Task<List<VMMenuAccess>> GetMenuAccessParentChildByRoleId(int idRole, int MenuParent, bool onlySelected = false)
         {
             List<VMMenuAccess> result =  new List<VMMenuAccess> ();
             List<TblMenu> data = db.TblMenus.Where(a => a.MenuParent == MenuParent && a.IsDelete == false)
@@ -28,9 +28,9 @@ namespace Xpos341.api.Services
                 list.IsParent = item.IsParent;
                 list.MenuParent = item.MenuParent;
                 list.is_selected = db.TblMenuAccesses.Where(a => a.RoleId == idRole && a.MenuId == item.Id && a.IsDelete == false).Any();
-                list.List_Child = await GetMenuAccessParentChildByRoleId(idRole, item.Id, isSelected);
+                list.List_Child = await GetMenuAccessParentChildByRoleId(idRole, item.Id, onlySelected);
                 
-                if (isSelected)
+                if (onlySelected)
                 {
                     if (list.is_selected) 
                         result.Add(list);

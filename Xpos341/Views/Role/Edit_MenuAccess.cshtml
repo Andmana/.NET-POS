@@ -1,5 +1,4 @@
-﻿@@ -0,0 +1,212 @@
-﻿@using xpos341.viewmodels
+﻿﻿@using xpos341.viewmodels
 
 @model VMTblRole
 
@@ -15,7 +14,7 @@
 
         <form asp-action="Edit_MenuAccess" method="post" id="form_input">
 
-            <input type="hidden" id="id" name="id" value="@Model.Id" />
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
 
             <div class="mb-4 row">
                 <label for="RoleName" class="col-sm-4 col-form-label">Name Role</label>
@@ -209,5 +208,58 @@
             return false
         }
     }
+
+    $('#form_input').validate({
+        errorClass: 'text-danger',
+        rules: {
+            RoleName : {
+                required : true,
+                minlength : 3,
+            },
+        },
+        messages: {
+            RoleName : {
+                required : "Please fill role Name",
+                minlength : 'The name must consist of at least 2 characters'
+            }
+        },
+        submitHandler : function(form){
+            //Validasi Menu Access CheckBox saat submit
+            if(validasi_list_selected()){
+
+                // var dataForm = $(form).serialize()
+                form_value.Id = $('#Id').val()
+                form_value.RoleName = $('#RoleName').val()
+
+                $.ajax({
+                    url : "/Role/Edit_MenuAccess",
+                    data : form_value,
+                    type : "post",
+                    dataType : "json", 
+                    success : function (response) {
+                        var data = response.dataResponse
+                        if(data.success){
+                            $('.modal').modal('hide')
+
+                            Swal.fire (
+                                'information',
+                                data.message,
+                                'success'
+                            ).then (function (){
+                                window.location.reload()
+                            })
+                        }
+                        else {
+                            Swa.fire({
+                                icon : 'error',
+                                title : 'warning',
+                                text : data.message
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    })
 
 </script>

@@ -23,6 +23,6 @@ namespace xpos341.viewmodels
         public string? NameRole { get; set; }
         public int? IdMenu {  get; set; }
         public bool is_selected { get; set; }
-        public List<VMMenuAccess> List_Child { get; set; }
+        public List<VMMenuAccess>? List_Child { get; set; }
     }
 }

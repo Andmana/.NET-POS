@@ -185,6 +185,7 @@ namespace Xpos341.api.Controllers
             result.role_menu = await roleService.GetMenuAccessParentChildByRoleId(result.Id, 0, false);
             return result;
         }
+
         //INI CARA : UPDATE ISDELETE TRUE (ALL) & INSERT (ALL)
         [HttpPut("Edit_MenuAccess")]
         public VMResponse Edit_MenuAccess(VMTblRole data)

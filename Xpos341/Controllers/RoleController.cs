@@ -179,5 +179,20 @@ namespace Xpos341.Controllers
             ViewBag.role_menu = data.role_menu;
             return PartialView(data);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit_MenuAccess(VMTblRole dataParam)
+        {
+            dataParam.UpdatedBy = idUser;
+
+            VMResponse response = await roleService.Edit_MenuAccess(dataParam);
+
+            if (response.Success)
+            {
+                return Json(new { dataResponse = response });
+            }
+
+            return View(dataParam);
+        }
     }
 }

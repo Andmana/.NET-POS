@@ -117,5 +117,31 @@ namespace Xpos341.Services
 
             return data;
         }
+
+        public async Task<VMResponse> Edit_MenuAccess(VMTblRole dataParam)
+        {
+            //Proses convert dari objext ke string
+                string json = JsonConvert.SerializeObject(dataParam);
+
+            //proses ubah string ke json
+            StringContent content = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+
+            var request = await client.PutAsync(RouteAPI + "apiRole/Edit_MenuAccess", content);
+
+            if (request.IsSuccessStatusCode)
+            {
+                var apiResponse = await request.Content.ReadAsStringAsync();
+
+                response = JsonConvert.DeserializeObject<VMResponse>(apiResponse);
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = $"{request.StatusCode} : {request.ReasonPhrase}";
+            }
+
+            return response;
+        }
+
     }
 }
