@@ -24,5 +24,14 @@ namespace Xpos341.Services
 
             return data;
         }
+
+
+        public async Task<List<VMMenuAccess>> MenuAccess(int IdRole)
+        {
+            string apiResponse = await client.GetStringAsync(RouteAPI + $"apiAuth/MenuAccess/{IdRole}");
+            List<VMMenuAccess> data = JsonConvert.DeserializeObject<List<VMMenuAccess>>(apiResponse);
+
+            return data;
+        }
     }
 }

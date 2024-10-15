@@ -206,7 +206,7 @@ create table TblMenuAccess(
 INSERT INTO TblMenu (MenuName, MenuAction, MenuController, MenuIcon, MenuSorting, IsParent, MenuParent, IsDelete, CreatedBy, CreatedDate, UpdatedBy, UpdatedDate) 
 VALUES 
 (N'Home', N'Index', N'Home', N'home', 1, 0, 15, 0, 1, GETDATE(), NULL, NULL),
-(N'Friend', N'Index', N'Friend', N'tag', 2, 0, 15, 0, 1, GETDATE(), NULL, NULL),
+(N'Friends', N'Index', N'Friends', N'tag', 2, 0, 15, 0, 1, GETDATE(), NULL, NULL),
 (N'CategoryTry', N'Index', N'CategoryTry', N'calendar', 3, 0, 15, 0, 1, GETDATE(), NULL, NULL),
 (N'VariantTry', N'Index', N'VariantTry', N'message-square', 4, 0, 15, 0, 1, GETDATE(), NULL, NULL),
 (N'Category', N'Index', N'Category', N'tag', 5, 0, 15, 0, 1, GETDATE(), NULL, NULL),
